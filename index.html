@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Trialbench - Research Project</title>
     <!-- 引入Bootstrap CSS -->
@@ -16,16 +17,24 @@
             padding-top: 60px;
         }
 
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
         .hero-section {
             background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             color: rgb(11, 11, 11);
             padding: 4rem 0;
             margin-bottom: 3rem;
+            font-size: 20px;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            font-weight: bold;
         }
 
         .main-image {
             width: 100%;
-            max-width: 800px;
+            max-width: 1600px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(245, 243, 243, 0.1);
         }
@@ -41,200 +50,627 @@
             background: white;
             padding: 2rem;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
     </style>
 </head>
+
 <body>
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Trialbench</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4 mb-4">TrialBench: Multi-Modal
+                Artificial-Intelligence-Ready Clinical Trial Datasets</h1>
+            <img src="main.png" alt="Methodology Overview" class="main-image">
+        </div>
+    </section>
+
+    <!-- Abstract Section -->
+    <section class="abstract-section py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Abstract</h2>
+            <p class="lead text-center">
+                Clinical trials are pivotal for developing new medical treatments but typically carry risks such as
+                patient mortality and enrollment failure that waste immense efforts spanning over a decade. Applying
+                artificial intelligence (AI) to predict key events in clinical trials holds great potential for
+                providing insights to guide trial designs. However, complex data collection and question definition
+                requiring medical expertise have hindered the involvement of AI thus far. This paper tackles these
+                challenges by presenting a comprehensive suite of 23 meticulously curated AI-ready datasets covering
+                multi-modal input features and 8 crucial prediction challenges in clinical trial design, encompassing
+                prediction of trial duration, patient dropout rate, serious adverse event, mortality rate, trial
+                approval outcome, trial failure reason, drug dose finding, design of eligibility criteria. Furthermore,
+                we provide basic validation methods for each task to ensure the datasets' usability and reliability. We
+                anticipate that the availability of such open-access datasets will catalyze the development of advanced
+                AI approaches for clinical trial design, ultimately advancing clinical trial research and accelerating
+                medical solution development.
+            </p>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <div class="container text-center mb-5">
+        <a href="dataset.zip" class="btn btn-primary btn-sm download-btn" id="downloadLink">
+            Download All (ZIP)
+        </a>
+        <p class="mt-3">Downloads: <span id="count">0</span></p>
+    </div>
+
+    <!-- Download Sub-tasks Section -->
+    <section class="download-subtasks py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Download Sub-tasks</h2>
+            <ul class="list-group">
+                <!-- 1. Trial Duration Forecasting -->
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Trial Duration Forecasting
+                    <div>
+                        <a href="trial_duration.zip" class="btn btn-primary btn-sm download-btn"
+                            data-key="trial_duration" download>
+                            Download
+                        </a>
+                        <!-- 使用小号字体和浅色显示下载次数 -->
+                        <small class="text-muted ms-2" id="trial_duration_count">(0)</small>
+                    </div>
+                </li>
+
+                <!-- 2. Patient Dropout Event Forecasting -->
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Patient Dropout Event Forecasting
+                    <div>
+                        <a href="patient_dropout.zip" class="btn btn-primary btn-sm download-btn"
+                            data-key="patient_dropout" download>
+                            Download
+                        </a>
+                        <small class="text-muted ms-2" id="patient_dropout_count">(0)</small>
+                    </div>
+                </li>
+
+                <!-- 3. Serious Adverse Event Forecasting -->
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Serious Adverse Event Forecasting
+                    <div>
+                        <a href="serious_adverse.zip" class="btn btn-primary btn-sm download-btn"
+                            data-key="serious_adverse" download>
+                            Download
+                        </a>
+                        <small class="text-muted ms-2" id="serious_adverse_count">(0)</small>
+                    </div>
+                </li>
+
+                <!-- 4. Mortality Event Prediction -->
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Mortality Event Prediction
+                    <div>
+                        <a href="mortality_prediction.zip" class="btn btn-primary btn-sm download-btn"
+                            data-key="mortality_prediction" download>
+                            Download
+                        </a>
+                        <small class="text-muted ms-2" id="mortality_prediction_count">(0)</small>
+                    </div>
+                </li>
+
+                <!-- 5. Trial Approval Forecasting -->
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Trial Approval Forecasting
+                    <div>
+                        <a href="trial_approval.zip" class="btn btn-primary btn-sm download-btn"
+                            data-key="trial_approval" download>
+                            Download
+                        </a>
+                        <small class="text-muted ms-2" id="trial_approval_count">(0)</small>
+                    </div>
+                </li>
+
+                <!-- 6. Trial Failure Reason Identification -->
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Trial Failure Reason Identification
+                    <div>
+                        <a href="trial_failure.zip" class="btn btn-primary btn-sm download-btn" data-key="trial_failure"
+                            download>
+                            Download
+                        </a>
+                        <small class="text-muted ms-2" id="trial_failure_count">(0)</small>
+                    </div>
+                </li>
+
+                <!-- 7. Eligibility Criteria Design -->
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Eligibility Criteria Design
+                    <div>
+                        <a href="eligibility_criteria.zip" class="btn btn-primary btn-sm download-btn"
+                            data-key="eligibility_criteria" download>
+                            Download
+                        </a>
+                        <small class="text-muted ms-2" id="eligibility_criteria_count">(0)</small>
+                    </div>
+                </li>
+
+                <!-- 8. Drug Dose Finding -->
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Drug Dose Finding
+                    <div>
+                        <a href="drug_dose_finding.zip" class="btn btn-primary btn-sm download-btn"
+                            data-key="drug_dose_finding" download>
+                            Download
+                        </a>
+                        <small class="text-muted ms-2" id="drug_dose_finding_count">(0)</small>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Results Section -->
     <div class="container">
-        <a class="navbar-brand" href="#">Trialbench</a>
+        <!-- Table 1 -->
+        <div class="results-table">
+            <h3>Comparison of different phases from several angles</h3>
+            <table style="border-collapse: collapse; border: medium; border-spacing: 0px;">
+                <tr>
+                    <td
+                        style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                    </td>
+                    <td
+                        style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                    </td>
+                    <td
+                        style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                    </td>
+                    <td
+                        style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                    </td>
+                </tr>
+                <tr>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black; text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                    </td>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        Phase I
+                    </td>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        Phase II
+                    </td>
+                    <td
+                        style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        Phase III
+                    </td>
+                </tr>
+                <tr>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        Spent time
+                    </td>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        1-2 years
+                    </td>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        1-2 years
+                    </td>
+                    <td style="padding-right: 3pt; padding-left: 3pt;">
+                        2-3 years
+                    </td>
+                </tr>
+                <tr>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        Spent Money ($)
+                    </td>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        225 M
+                    </td>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        225 M
+                    </td>
+                    <td style="padding-right: 3pt; padding-left: 3pt;">
+                        250 M
+                    </td>
+                </tr>
+                <tr>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        Result
+                    </td>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        5-10 candidates
+                    </td>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        2-5 candidates
+                    </td>
+                    <td style="padding-right: 3pt; padding-left: 3pt;">
+                        1-2 candidates
+                    </td>
+                </tr>
+                <tr>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        Major objective
+                    </td>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        safety
+                    </td>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        safety and dosing
+                    </td>
+                    <td style="padding-right: 3pt; padding-left: 3pt;">
+                        safety and efficacy
+                    </td>
+                </tr>
+                <tr>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        # of patients
+                    </td>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        20-80
+                    </td>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        100-300
+                    </td>
+                    <td style="padding-right: 3pt; padding-left: 3pt;">
+                        300-3000
+                    </td>
+                </tr>
+                <tr>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; text-align: center; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        Recruited patient
+                    </td>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        healthy
+                    </td>
+                    <td
+                        style="border-right-width: 1px; border-right-style: solid; border-right-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        with diseases
+                    </td>
+                    <td
+                        style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        with diseases
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Table 2 -->
+        <div class="results-table">
+            <h3> Statistics of all the curated AI-solvable clinical trial datasets</h3>
+            <table style="border-collapse: collapse; border: medium; border-spacing: 0px;">
+                <!-- <caption>
+                    Statistics of all the curated AI-solvable clinical trial datasets.
+                </caption> -->
+                <tr>
+                <tr>
+                    <td
+                        style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                    </td>
+                    <td
+                        style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                    </td>
+                    <td
+                        style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                    </td>
+                    <td
+                        style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                    </td>
+                    <td
+                        style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                    </td>
+                    <td
+                        style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                    </td>
+                    <td
+                        style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                    </td>
+                </tr>
+                <td
+                    style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black; text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                    Tasks
+                </td>
+                <td
+                    style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black; text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                    # trials (I/II/III/IV)
+                </td>
+                <td
+                    style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black; text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                    # drugs
+                </td>
+                <td
+                    style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black; text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                    # med device
+                </td>
+                <td
+                    style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black; text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                    # other inter
+                </td>
+                <td
+                    style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black; text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                    # diseases
+                </td>
+                <td
+                    style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black; text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                    Intervention study (%)
+                </td>
+                <td
+                    style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black; text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                </td>
+                </tr>
+                <tr>
+                    <td style="padding-right: 3pt; padding-left: 3pt;">
+                        trial duration forecasting
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        143.8K (13.5K/13.4K/9.2K/7.1K)
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        40.8K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        21.1K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        83.6K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        44.6K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        77.3%
+                    </td>
+                    <td style="padding-right: 3pt; padding-left: 3pt;">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-right: 3pt; padding-left: 3pt;">
+                        patient dropout event forecasting
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        62.1K (4.2K/15.8K/11.5K/6.9K)
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        29.7K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        10.9K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        20.7K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        21.9K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        94.5%
+                    </td>
+                    <td style="padding-right: 3pt; padding-left: 3pt;">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-right: 3pt; padding-left: 3pt;">
+                        serious adverse event forecasting
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        31.3K (2.0K/8.1K/4.8K/2.9K)
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        15.9K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        6.6K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        12.4K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        15.9K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        96.0%
+                    </td>
+                    <td style="padding-right: 3pt; padding-left: 3pt;">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-right: 3pt; padding-left: 3pt;">
+                        mortality event prediction
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        31.3K (2.0K/8.1K/4.8K/2.9K)
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        15.9K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        6.6K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        12.4K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        15.9K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        96.0%
+                    </td>
+                    <td style="padding-right: 3pt; padding-left: 3pt;">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-right: 3pt; padding-left: 3pt;">
+                        trial approval forecasting
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        43.2K (4.5K/12.5K/9.2K/4.5K)
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        24.1K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        3.3K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        12.6K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        19.5K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        93.0%
+                    </td>
+                    <td style="padding-right: 3pt; padding-left: 3pt;">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-right: 3pt; padding-left: 3pt;">
+                        trial failure reason identification
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        41.4K (4.3K/8.8K/4.2K/3.5K)
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        17.7K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        6.6K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        16.9K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        21.9K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        86.8%
+                    </td>
+                    <td style="padding-right: 3pt; padding-left: 3pt;">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-right: 3pt; padding-left: 3pt;">
+                        eligibility criteria design
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        136.4K (19.4K/14.2K/10.8K/10.6K)
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        48.5K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        16.2K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        75.0K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        36.6K
+                    </td>
+                    <td style="text-align: center; padding-right: 3pt; padding-left: 3pt;">
+                        84.9%
+                    </td>
+                    <td style="padding-right: 3pt; padding-left: 3pt;">
+                    </td>
+                </tr>
+                <tr>
+                    <td
+                        style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        drug dose finding
+                    </td>
+                    <td
+                        style="text-align: center; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        12.8K (0/12.8K/0/0)
+                    </td>
+                    <td
+                        style="text-align: center; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        11.0K
+                    </td>
+                    <td
+                        style="text-align: center; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        0.1K
+                    </td>
+                    <td
+                        style="text-align: center; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        1.2K
+                    </td>
+                    <td
+                        style="text-align: center; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        7.3K
+                    </td>
+                    <td
+                        style="text-align: center; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                        100%
+                    </td>
+                    <td
+                        style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+        <!-- Analysis Chart -->
+        <div class="chart-container">
+            <!-- <h3 class="mb-4">Result Analysis</h3> -->
+            <img src="combine3fig.png" alt="Result Analysis" class="img-fluid">
+            <p class="mb-4">
+                (a) A histogram showing the distribution of start dates for the selected trials reveals a steady
+                increase in the number of initiated trials over time, reflecting the growing demand for new treatments.
+                <br>
+                (b) A statistical breakdown of the clinical trials by phase indicates that the majority of trials are in
+                Phase II. <br>
+                (c) The frequency of events varies across different phases, as exemplified by the dropout rates among
+                participants. <br>
+            </p>
+        </div>
     </div>
-</nav>
 
-<!-- Hero Section -->
-<section class="hero-section text-center">
-    <div class="container">
-        <h1 class="display-4 mb-4">TrialBench: Multi-Modal1
-            Artificial-Intelligence-Ready Clinical Trial Datasets</h1>
-        <img src="main.png" alt="Methodology Overview" class="main-image">
-    </div>
-</section>
+    <!-- CountAPI 统计脚本 -->
+    <script>
+        const NAMESPACE = "trialbench";
 
-<!-- Download Section -->
-<div class="container text-center mb-5">
-    <a href="dataset.zip" class="btn btn-primary btn-lg" id="downloadLink">
-        Download Dataset (ZIP)
-    </a>
-    <p class="mt-3">Downloads: <span id="count">0</span></p>
-</div>
+        // 找到所有带 .download-btn 类的按钮
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            const key = btn.getAttribute('data-key');
+            const countSpan = document.getElementById(key + '_count');
 
-<!-- Results Section -->
-<div class="container">
-    <!-- Table 1 -->
-    <div class="results-table">
-        <h3>Comparison of different phases from several angles.</h3>
-        <table style="border-collapse: collapse; border: medium; border-spacing: 0px;">
-            <tr>
-                <td style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
-                </td>
-                <td style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
-                </td>
-                <td style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
-                </td>
-                <td style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
-                </td>
-            </tr>
-            <tr>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black; text-align: center; padding-right: 3pt; padding-left: 3pt;">
-                </td>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
-                    Phase I
-                </td>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
-                    Phase II
-                </td>
-                <td style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
-                    Phase III
-                </td>
-            </tr>
-            <tr>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; text-align: center; padding-right: 3pt; padding-left: 3pt;">
-                    Spent time
-                </td>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; padding-right: 3pt; padding-left: 3pt;">
-                    1-2 years
-                </td>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; padding-right: 3pt; padding-left: 3pt;">
-                    1-2 years
-                </td>
-                <td style="padding-right: 3pt; padding-left: 3pt;">
-                    2-3 years
-                </td>
-            </tr>
-            <tr>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; text-align: center; padding-right: 3pt; padding-left: 3pt;">
-                    Spent Money ($)
-                </td>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; padding-right: 3pt; padding-left: 3pt;">
-                    225 M
-                </td>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; padding-right: 3pt; padding-left: 3pt;">
-                    225 M
-                </td>
-                <td style="padding-right: 3pt; padding-left: 3pt;">
-                    250 M
-                </td>
-            </tr>
-            <tr>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; text-align: center; padding-right: 3pt; padding-left: 3pt;">
-                    Result
-                </td>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; padding-right: 3pt; padding-left: 3pt;">
-                    5-10 candidates
-                </td>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; padding-right: 3pt; padding-left: 3pt;">
-                    2-5 candidates
-                </td>
-                <td style="padding-right: 3pt; padding-left: 3pt;">
-                    1-2 candidates
-                </td>
-            </tr>
-            <tr>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; text-align: center; padding-right: 3pt; padding-left: 3pt;">
-                    Major objective
-                </td>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; padding-right: 3pt; padding-left: 3pt;">
-                    safety
-                </td>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; padding-right: 3pt; padding-left: 3pt;">
-                    safety and dosing
-                </td>
-                <td style="padding-right: 3pt; padding-left: 3pt;">
-                    safety and efficacy
-                </td>
-            </tr>
-            <tr>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; text-align: center; padding-right: 3pt; padding-left: 3pt;">
-                    # of patients
-                </td>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; padding-right: 3pt; padding-left: 3pt;">
-                    20-80
-                </td>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; padding-right: 3pt; padding-left: 3pt;">
-                    100-300
-                </td>
-                <td style="padding-right: 3pt; padding-left: 3pt;">
-                    300-3000
-                </td>
-            </tr>
-            <tr>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; text-align: center; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
-                    Recruited patient
-                </td>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
-                    healthy
-                </td>
-                <td style="border-right-width: 1px; border-right-style: solid; border-right-color: black; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
-                    with diseases
-                </td>
-                <td style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: black; padding-right: 3pt; padding-left: 3pt;">
-                    with diseases
-                </td>
-            </tr>
-        </table>
-    </div>
+            // 页面加载时获取下载次数
+            fetch(`https://api.countapi.xyz/get/${NAMESPACE}/${key}`)
+                .then(response => response.json())
+                .then(data => {
+                    // 显示在小号文字中，比如 (5)
+                    countSpan.textContent = `(${data.value})`;
+                })
+                .catch(error => console.error(error));
 
-    <!-- Table 2 -->
-    <div class="results-table">
-        <h3>Table 2: Dataset Statistics</h3>
-        <img src="table2.png" alt="Dataset Stats" class="img-fluid">
-    </div>
-
-    <!-- Table 3 -->
-    <div class="results-table">
-        <h3>Table 3: Computational Efficiency</h3>
-        <img src="table3.png" alt="Efficiency Metrics" class="img-fluid">
-    </div>
-
-    <!-- Analysis Chart -->
-    <div class="chart-container">
-        <h3 class="mb-4">Result Analysis</h3>
-        <img src="analysis-chart.png" alt="Result Analysis" class="img-fluid">
-        <!-- 或者使用交互式图表库 -->
-        <!--
-        <div id="chart" style="height: 400px;"></div>
-        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-        -->
-    </div>
-</div>
-
-<!-- 计数脚本 -->
-<script>
-    // 保持之前的计数逻辑
-    const NAMESPACE = "trialbench";
-    const KEY = "dataset-downloads";
-
-    fetch(`https://api.countapi.xyz/get/${NAMESPACE}/${KEY}`)
-        .then(res => res.json())
-        .then(data => {
-            document.getElementById('count').textContent = data.value;
+            // // 点击按钮时更新下载次数（通过 Cookie 避免重复计数）
+            // btn.addEventListener('click', function(e) {
+            //     if (!document.cookie.includes(key + '_downloaded')) {
+            //     fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${key}`);
+            //     document.cookie = key + '_downloaded=true; max-age=86400';
+            //     }
+            // });
         });
+    </script>
 
-    document.getElementById('downloadLink').addEventListener('click', (e) => {
-        e.preventDefault();
-        if (!document.cookie.includes('downloaded')) {
-            fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`);
-            document.cookie = "downloaded=true; max-age=86400";
-        }
-        const link = document.createElement('a');
-        link.href = e.target.href;
-        link.download = 'dataset.zip';
-        link.click();
-    });
-</script>
 
 </body>
+
 </html>
