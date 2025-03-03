@@ -642,31 +642,65 @@
         </div>
     </div>
 
-    <!-- CountAPI 统计脚本 -->
     <script>
+        // 配置计数API
         const NAMESPACE = "trialbench";
 
-        // 找到所有带 .download-btn 类的按钮
-        document.querySelectorAll('download-btn').forEach(btn => {
-            const key = btn.getAttribute('data-key');
-            const countSpan = document.getElementById(key + '_count');
+        // 初始化所有下载次数显示
+        function initDownloadCounts() {
+            document.querySelectorAll('.download-btn').forEach(btn => {
+                const key = btn.getAttribute('data-key');
+                const countSpan = document.getElementById(key + '_count');
 
-            // 页面加载时获取下载次数
-            fetch(`https://api.countapi.xyz/get/${NAMESPACE}/${key}`)
-                .then(response => response.json())
-                .then(data => {
-                    // 显示在小号文字中，比如 (5)
-                    countSpan.textContent = `${data.value}`;
-                })
-                .catch(error => console.error(error));
+                // 获取当前计数
+                fetch(`https://api.countapi.xyz/get/${NAMESPACE}/${key}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        countSpan.textContent = data.value || 0;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching count:', error);
+                        countSpan.textContent = 'N/A';
+                    });
+            });
+        }
 
-            // // 点击按钮时更新下载次数（通过 Cookie 避免重复计数）
-            // btn.addEventListener('click', function(e) {
-            //     if (!document.cookie.includes(key + '_downloaded')) {
-            //     fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${key}`);
-            //     document.cookie = key + '_downloaded=true; max-age=86400';
-            //     }
-            // });
+        // 绑定点击事件
+        function setupDownloadHandlers() {
+            document.querySelectorAll('.download-btn').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const key = this.getAttribute('data-key');
+                    const fileUrl = this.href;
+                    const countSpan = document.getElementById(key + '_count');
+
+                    // 检查Cookie防止重复计数
+                    const cookieName = `${NAMESPACE}_${key}_downloaded`;
+                    if (!document.cookie.includes(cookieName)) {
+                        // 更新计数
+                        fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${key}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                countSpan.textContent = data.value;
+                                // 设置24小时有效期的Cookie
+                                document.cookie = `${cookieName}=true; max-age=86400; path=/`;
+                            })
+                            .catch(error => console.error('Error updating count:', error));
+                    }
+
+                    // 触发文件下载
+                    const tempLink = document.createElement('a');
+                    tempLink.href = fileUrl;
+                    tempLink.download = true;
+                    tempLink.click();
+                });
+            });
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            initDownloadCounts();
+            setupDownloadHandlers();
         });
     </script>
 
