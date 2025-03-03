@@ -56,10 +56,14 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
-        .worldMap {
-            background: #f8f9fa;
+        #worldMap {
+            background: #ffffff;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .author-info {
+            font-size: 0.6rem;
         }
     </style>
 </head>
@@ -86,10 +90,47 @@
 
             <!-- 作者信息模块 -->
             <div class="author-info mb-4">
-                <!-- <h2 class="h5 text-muted">Authors</h2> -->
-                <p class="mb-0">John Smith<sup>1</sup>, Jane Doe<sup>2</sup>, Alice Lee<sup>1</sup></p>
-                <p class="text-muted mb-0"><small>1. Department of Computer Science, ABC University</small></p>
-                <p class="text-muted"><small>2. Institute of AI, XYZ Research Center</small></p>
+                <p class="mb-0">
+                    Jintai Chen<sup>1,†</sup>,
+                    Yaojun Hu<sup>2,†</sup>,
+                    Yingzhou Lu<sup>3,†</sup>,
+                    Yue Wang<sup>2</sup>,
+                    Xu Cao<sup>1</sup>,
+                    Miao Lin<sup>4</sup>,
+                    Hongxia Xu<sup>5</sup>,
+                    Jian Wu<sup>6</sup>,
+                    Cao Xiao<sup>7</sup>,
+                    Jimeng Sun<sup>1</sup>,
+                    Lucas Glass<sup>8</sup>,
+                    Kexin Huang<sup>9</sup>,
+                    Marinka Zitnik<sup>10</sup>,
+                    Tianfan Fu<sup>11,*</sup>
+                </p>
+                <p class="text-muted mb-0"><small>1. Computer Science Department, University of Illinois at
+                        Urbana-Champaign, Urbana, USA</small></p>
+                <p class="text-muted mb-0"><small>2. College of Computer Science and Technology, Zhejiang University,
+                        Hangzhou, China</small></p>
+                <p class="text-muted mb-0"><small>3. School of Medicine, Stanford University, Stanford, CA, USA</small>
+                </p>
+                <p class="text-muted mb-0"><small>4. Medical Big Data Center, Guangdong Provincial People's Hospital
+                        (Guangdong Academy of Medical Sciences), Southern Medical University, Guangzhou, China</small>
+                </p>
+                <p class="text-muted mb-0"><small>5. Innovation Institute for Artificial Intelligence in Medicine of
+                        Zhejiang University, College of Pharmaceutical Sciences, Zhejiang University, Hangzhou,
+                        China</small></p>
+                <p class="text-muted mb-0"><small>6. The Second Affiliated Hospital, Zhejiang University School of
+                        Medicine, Hangzhou, China</small></p>
+                <p class="text-muted mb-0"><small>7. GE HealthCare, Chicago, USA</small></p>
+                <p class="text-muted mb-0"><small>8. IQVIA, Boston, USA</small></p>
+                <p class="text-muted mb-0"><small>9. Computer Science Department, Stanford University, Stanford, CA,
+                        USA</small></p>
+                <p class="text-muted mb-0"><small>10. Informatics, Harvard Medical School, Harvard University,
+                        USA</small></p>
+                <p class="text-muted mb-0"><small>11. Department of Computer Science, Rensselaer Polytechnic Institute,
+                        NY, USA</small></p>
+                <p class="text-muted mb-0"><small>* Corresponding author(s): Tianfan Fu (<a
+                            href="mailto:futianfan@gmail.com">futianfan@gmail.com</a>)</small></p>
+                <p class="text-muted"><small>† These authors contributed equally to this work.</small></p>
             </div>
         </div>
     </section>
@@ -132,8 +173,10 @@
             </a>
 
             <!-- Data 按钮 -->
-            <a href="dataset.zip" class="btn btn-dark btn-lg download-btn" data-key="all" id="downloadLink">
+            <a href="https://zenodo.org/records/14960751/files/all_task.zip?download=1"
+                class="btn btn-dark btn-lg download-btn" data-key="all" id="downloadLink">
                 <i class="fas fa-database me-2"></i>Data
+                <small class="text-muted ms-2" id="all_count">(0)</small>
             </a>
         </div>
     </div>
@@ -141,13 +184,24 @@
     <!-- Bootstrap JS (可选) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Download All Section -->
-    <!-- <div class="container text-center mb-5">
-        <a href="dataset.zip" class="btn btn-dark btn-lg download-btn" data-key="all" id="downloadLink">
-            Download All (ZIP)
-        </a>
-        <p class="mt-3">Downloads: <span id="all_count">(0)</span></p>
-    </div>  -->
+</body>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Download Sub-tasks & World Map</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入 Highcharts Maps 和相关模块 -->
+    <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/data.js"></script>
+    <!-- 如果使用旧的 GeoJSON 需要 Proj4js；若地图数据为 TopoJSON 可不加载 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.7.5/proj4.js"></script>
+    <!-- 引入世界地图数据 -->
+    <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
+</head>
+
+<body>
 
     <!-- Download Sub-tasks Section -->
     <section class="download-subtasks py-5">
@@ -158,7 +212,8 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Trial Duration Forecasting
                     <div>
-                        <a href="trial_duration.zip" class="btn btn-dark btn-lg download-btn" data-key="trial_duration">
+                        <a href="https://zenodo.org/records/14960751/files/trial-duration-forecasting.zip?download=1"
+                            class="btn btn-dark btn-lg download-btn" data-key="trial_duration">
                             Download
                         </a>
                         <small class="text-muted ms-2" id="trial_duration_count">(0)</small>
@@ -169,8 +224,8 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Patient Dropout Event Forecasting
                     <div>
-                        <a href="patient_dropout.zip" class="btn btn-dark btn-lg download-btn"
-                            data-key="patient_dropout">
+                        <a href="https://zenodo.org/records/14960751/files/patient-dropout-event-forecasting.zip?download=1"
+                            class="btn btn-dark btn-lg download-btn" data-key="patient_dropout">
                             Download
                         </a>
                         <small class="text-muted ms-2" id="patient_dropout_count">(0)</small>
@@ -181,8 +236,8 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Serious Adverse Event Forecasting
                     <div>
-                        <a href="serious_adverse.zip" class="btn btn-dark btn-lg download-btn"
-                            data-key="serious_adverse">
+                        <a href="https://zenodo.org/records/14960751/files/serious-adverse-event-forecasting.zip?download=1"
+                            class="btn btn-dark btn-lg download-btn" data-key="serious_adverse">
                             Download
                         </a>
                         <small class="text-muted ms-2" id="serious_adverse_count">(0)</small>
@@ -193,8 +248,8 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Mortality Event Prediction
                     <div>
-                        <a href="mortality_prediction.zip" class="btn btn-dark btn-lg download-btn"
-                            data-key="mortality_prediction">
+                        <a href="https://zenodo.org/records/14960751/files/mortality-event-prediction.zip?download=1"
+                            class="btn btn-dark btn-lg download-btn" data-key="mortality_prediction">
                             Download
                         </a>
                         <small class="text-muted ms-2" id="mortality_prediction_count">(0)</small>
@@ -205,7 +260,8 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Trial Approval Forecasting
                     <div>
-                        <a href="trial_approval.zip" class="btn btn-dark btn-lg download-btn" data-key="trial_approval">
+                        <a href="https://zenodo.org/records/14960751/files/trial-approval-forecasting.zip?download=1"
+                            class="btn btn-dark btn-lg download-btn" data-key="trial_approval">
                             Download
                         </a>
                         <small class="text-muted ms-2" id="trial_approval_count">(0)</small>
@@ -216,7 +272,8 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Trial Failure Reason Identification
                     <div>
-                        <a href="trial_failure.zip" class="btn btn-dark btn-lg download-btn" data-key="trial_failure">
+                        <a href="https://zenodo.org/records/14960751/files/trial-failure-reason-identification.zip?download=1"
+                            class="btn btn-dark btn-lg download-btn" data-key="trial_failure">
                             Download
                         </a>
                         <small class="text-muted ms-2" id="trial_failure_count">(0)</small>
@@ -227,8 +284,8 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Eligibility Criteria Design
                     <div>
-                        <a href="eligibility_criteria.zip" class="btn btn-dark btn-lg download-btn"
-                            data-key="eligibility_criteria">
+                        <a href="https://zenodo.org/records/14960751/files/eligibility-criteria-design.zip?download=1"
+                            class="btn btn-dark btn-lg download-btn" data-key="eligibility_criteria">
                             Download
                         </a>
                         <small class="text-muted ms-2" id="eligibility_criteria_count">(0)</small>
@@ -239,8 +296,8 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Drug Dose Finding
                     <div>
-                        <a href="drug_dose_finding.zip" class="btn btn-dark btn-lg download-btn"
-                            data-key="drug_dose_finding">
+                        <a href="https://zenodo.org/records/14960751/files/drug-dose-prediction.zip?download=1"
+                            class="btn btn-dark btn-lg download-btn" data-key="drug_dose_finding">
                             Download
                         </a>
                         <small class="text-muted ms-2" id="drug_dose_finding_count">(0)</small>
@@ -250,45 +307,116 @@
         </div>
     </section>
 
-    <script>
-        // 替换为你的 Apps Script URL
-        const API_URL = "https://script.google.com/macros/s/AKfycbxNXoXFDtb9qY6jqmz2WTOk0MDscs8FkegZYNW7hFKUD32Ppe8PvMk9KwXu1TPu3LuP/exec";
-        // 查找页面上所有带 .download-btn 类的链接
-        document.querySelectorAll('.download-btn').forEach(btn => {
-            const key = btn.getAttribute('data-key');              // 计数器的 key
-            const countSpan = document.getElementById(key + '_count');
+    <!-- World Map Section -->
+    <div id="mapContainer" style="height: 600px; min-width: 800px"></div>
 
-            // 1. 页面加载时，先获取当前计数 (action=get)，不增加计数
-            fetch(`${API_URL}?key=${key}&action=get`)
+    <!-- 前端脚本 -->
+    <script>
+        // Cloudflare Worker URL（替换为你自己的 URL）
+        const API_URL = 'https://countryclicks.huuyjun.workers.dev';
+        let chart;
+        function initMap() {
+            chart = Highcharts.mapChart('mapContainer', {
+                chart: { map: 'custom/world' },
+                title: { text: 'Global Click Distribution' },
+                colorAxis: {
+                    min: 0,
+                    stops: [
+                        [0, '#EFEFFF'],
+                        [0.5, '#4444FF'],
+                        [1, '#000022']
+                    ]
+                },
+                series: [{
+                    data: [], // 初始化时先空
+                    name: 'Clicks',
+                    states: { hover: { color: '#a4edba' } },
+                    dataLabels: { enabled: true, format: '{point.name}' },
+                    tooltip: { valueSuffix: '' }
+                }]
+            });
+        }
+
+        // 2) 获取最新统计并更新地图
+        function fetchStatsAndUpdateMap() {
+            fetch(`${API_URL}/stats?global=true`)
                 .then(res => res.json())
                 .then(data => {
-                    countSpan.textContent = `(${data.value})`;
+                    // data = { "US": 12, "CN": 5, ... }
+                    const chartData = Object.entries(data).map(([countryCode, clicks]) => {
+                        return [countryCode.toLowerCase(), clicks];
+                    });
+                    chart.series[0].setData(chartData);
+                })
+                .catch(err => console.error('Error fetching stats:', err));
+        }
+
+        // 为所有 sub task 按钮添加计数逻辑
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            const key = btn.getAttribute('data-key');  // 例如 "trial_duration"
+            const countSpan = document.getElementById(key + '_count');
+
+            // 页面加载时，获取当前单独计数（action=get）
+            fetch(`${API_URL}/hit?key=${key}&action=get`)
+                .then(res => res.json())
+                .then(data => {
+                    countSpan.textContent = `(${data.individual})`;
                 })
                 .catch(err => console.error(err));
 
-            // 2. 点击时，先发起 "hit" 请求增加计数，再执行实际下载
+            // 点击时，先发起 "hit" 请求（action=hit），然后触发下载
             btn.addEventListener('click', e => {
-                e.preventDefault(); // 阻止默认点击行为，先处理计数逻辑
-
-                // 发起 hit 请求，使计数 +1
-                fetch(`${API_URL}?key=${key}&action=hit`)
+                e.preventDefault();  // 阻止默认点击行为
+                fetch(`${API_URL}/hit?key=${key}&action=hit`)
                     .then(res => res.json())
                     .then(data => {
-                        // 更新页面上的计数
-                        countSpan.textContent = `(${data.value})`;
-
-                        // 触发真正的下载
+                        // 更新单独计数
+                        countSpan.textContent = `(${data.individual})`;
+                        // 触发下载：创建临时链接点击
                         const tempLink = document.createElement('a');
                         tempLink.href = btn.href;
-                        // 提取文件名（如果想强制下载可加 download="xxx"）
                         tempLink.download = btn.href.split('/').pop();
                         tempLink.click();
                     })
                     .catch(err => console.error(err));
             });
         });
+
+        // 加载世界地图：获取全局统计数据（global=true）
+        fetch(`${API_URL}/stats?global=true`)
+            .then(response => response.json())
+            .then(data => {
+                // data 格式为 { "us": 120, "in": 80, ... } ——注意 worker 中返回的国家代码为大写，转为小写
+                const chartData = Object.entries(data).map(([countryCode, clicks]) => {
+                    return [countryCode.toLowerCase(), clicks];
+                });
+
+                Highcharts.mapChart('mapContainer', {
+                    chart: { map: 'custom/world' },
+                    title: { text: 'Global Click Distribution' },
+                    colorAxis: {
+                        min: 0,
+                        stops: [
+                            [0, '#EFEFFF'],
+                            [0.5, '#4444FF'],
+                            [1, '#000022']
+                        ]
+                    },
+                    series: [{
+                        data: chartData,
+                        name: 'Clicks',
+                        states: { hover: { color: '#4444FF' } },
+                        dataLabels: { enabled: true, format: '{point.name}' },
+                        tooltip: { valueSuffix: '' }
+                    }]
+                });
+            })
+            .catch(err => console.error('Error fetching global stats:', err));
     </script>
 
+</body>
+
+<body>
     <!-- Results Section -->
     <div class="container">
         <!-- Table 1 -->
@@ -722,98 +850,6 @@
             </p>
         </div>
     </div>
-
-    <!-- 地图容器 -->
-    <div class="container mt-5">
-        <h3 class="text-center mb-4">Global Dataset Access Distribution</h3>
-        <div id="worldMap" style="height: 500px; width: 100%;"></div>
-    </div>
-
-    <!-- 引入必要库 -->
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js"></script>
-    <script>
-        // Firebase 配置（替换为你自己的配置）
-        const firebaseConfig = {
-            apiKey: "AIzaSyCEvdoo5F1MHdIKJzpl5pDiYMcJB-8BDyU",
-            authDomain: "trialbench.firebaseapp.com",
-            databaseURL: "https://trialbench-default-rtdb.firebaseio.com/",
-            projectId: "786037599501",
-            storageBucket: "trialbench.appspot.com",
-            messagingSenderId: "786037599501",
-            // appId: "1:1234567890:web:abcd1234efgh5678"
-        };
-
-        // 初始化 Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
-
-        // 初始化地图
-        function initWorldMap(countryData) {
-            const chart = echarts.init(document.getElementById('worldMap'));
-
-            const option = {
-                tooltip: {
-                    trigger: 'item',
-                    formatter: '{b}: {c}次访问'
-                },
-                visualMap: {
-                    min: 0,
-                    max: Math.max(...Object.values(countryData)),
-                    left: 'right',
-                    inRange: {
-                        color: ['#e0f3f8', '#abd9e9', '#74add1', '#4575b4', '#313695']
-                    },
-                    text: ['高', '低'],
-                    calculable: true
-                },
-                series: [{
-                    name: '访问次数',
-                    type: 'map',
-                    map: 'world',
-                    roam: true,
-                    data: Object.entries(countryData).map(([name, value]) => ({ name, value })),
-                    emphasis: {
-                        label: {
-                            show: true
-                        }
-                    }
-                }]
-            };
-
-            chart.setOption(option);
-        }
-
-        // 获取访问者国家并更新数据库
-        function trackCountry() {
-            // 获取国家代码（使用ipapi.co免费API）
-            fetch('https://ipapi.co/json/')
-                .then(response => response.json())
-                .then(data => {
-                    const countryCode = data.country_code;
-                    const updates = {};
-                    updates[countryCode] = firebase.database.ServerValue.increment(1);
-                    database.ref('countryVisits').update(updates);
-                })
-                .catch(error => console.error('Error tracking country:', error));
-        }
-
-        // 实时监听数据库变化
-        function setupRealtimeMap() {
-            database.ref('countryVisits').on('value', (snapshot) => {
-                const data = snapshot.val() || {};
-                initWorldMap(data);
-            });
-        }
-
-        // 初始化
-        document.addEventListener('DOMContentLoaded', () => {
-            trackCountry();     // 记录本次访问
-            setupRealtimeMap(); // 启动实时监听
-        });
-    </script>
-
 </body>
 
 </html>
