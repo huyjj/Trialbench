@@ -176,9 +176,10 @@
             <a href="https://zenodo.org/records/14960751/files/all_task.zip?download=1"
                 class="btn btn-dark btn-lg download-btn" data-key="all" id="downloadLink">
                 <i class="fas fa-database me-2"></i>Data
-                <small class="text-muted ms-2" id="all_count">(0)</small>
+                <!-- <small class="text-muted ms-2" id="all_count">(0)</small> -->
             </a>
         </div>
+        <small class="text-center mb-4" id="all_count" style="font-size: 0.8em; color: #6c757d;">(0)</small>
     </div>
 
     <!-- Bootstrap JS (可选) -->
@@ -757,6 +758,33 @@
             .catch(err => console.error('Error recording page visit:', err));
 
         // 为所有下载按钮绑定点击事件
+        // document.querySelectorAll('.download-btn').forEach(btn => {
+        //     const key = btn.getAttribute('data-key');  // 例如 "trial_duration"
+        //     const countSpan = document.getElementById(key + '_count');
+
+        //     // 页面加载时获取当前下载计数（不增加）
+        //     fetch(`${API_URL}/hit?type=download&key=${key}&action=get`)
+        //         .then(res => res.json())
+        //         .then(data => {
+        //             countSpan.textContent = `Downloaded ${data.individual} times`;
+        //         })
+        //         .catch(err => console.error(err));
+
+        //     // 点击时：先调用下载统计接口（action=hit），更新计数，再触发下载
+        //     btn.addEventListener('click', e => {
+        //         e.preventDefault();
+        //         fetch(`${API_URL}/hit?type=download&key=${key}&action=hit`)
+        //             .then(res => res.json())
+        //             .then(data => {
+        //                 countSpan.textContent = `(${data.individual})`;
+        //                 // 触发下载：创建临时链接点击
+        //                 const tempLink = document.createElement('a');
+        //                 tempLink.href = btn.href;
+        //                 tempLink.click();
+        //             })
+        //             .catch(err => console.error(err));
+        //     });
+        // });
         document.querySelectorAll('.download-btn').forEach(btn => {
             const key = btn.getAttribute('data-key');  // 例如 "trial_duration"
             const countSpan = document.getElementById(key + '_count');
@@ -765,7 +793,7 @@
             fetch(`${API_URL}/hit?type=download&key=${key}&action=get`)
                 .then(res => res.json())
                 .then(data => {
-                    countSpan.textContent = `(${data.individual})`;
+                    countSpan.textContent = `Downloaded ${data.individual} times`;
                 })
                 .catch(err => console.error(err));
 
@@ -775,11 +803,13 @@
                 fetch(`${API_URL}/hit?type=download&key=${key}&action=hit`)
                     .then(res => res.json())
                     .then(data => {
-                        countSpan.textContent = `(${data.individual})`;
+                        countSpan.textContent = `Downloaded ${data.individual} times`;
+
                         // 触发下载：创建临时链接点击
                         const tempLink = document.createElement('a');
                         tempLink.href = btn.href;
                         tempLink.click();
+
                     })
                     .catch(err => console.error(err));
             });
