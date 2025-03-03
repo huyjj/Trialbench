@@ -5,6 +5,8 @@
     <title>Trialbench - Research Project</title>
     <!-- 引入Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         :root {
             --primary-color: #ffffff;
@@ -35,8 +37,9 @@
         .main-image {
             width: 100%;
             max-width: 1600px;
-            border-radius: 8px;
+            border-radius: 16px;
             box-shadow: 0 4px 6px rgba(245, 243, 243, 0.1);
+            margin-bottom: 2rem;
         }
 
         .results-table {
@@ -52,26 +55,45 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
+
+        .worldMap {
+            background: #f8f9fa;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">Trialbench</a>
         </div>
-    </nav>
+    </nav> -->
 
     <!-- Hero Section -->
     <section class="hero-section text-center">
         <div class="container">
-            <h1 class="display-4 mb-4">TrialBench: Multi-Modal
-                Artificial-Intelligence-Ready Clinical Trial Datasets</h1>
+            <!-- 主图 -->
             <img src="docs/main.png" alt="Methodology Overview" class="main-image">
+
+            <!-- 标题 -->
+            <h1 class="display-4 mb-4">
+                TrialBench: Multi-Modal Artificial-Intelligence-Ready Clinical Trial Datasets
+            </h1>
+
+            <!-- 作者信息模块 -->
+            <div class="author-info mb-4">
+                <!-- <h2 class="h5 text-muted">Authors</h2> -->
+                <p class="mb-0">John Smith<sup>1</sup>, Jane Doe<sup>2</sup>, Alice Lee<sup>1</sup></p>
+                <p class="text-muted mb-0"><small>1. Department of Computer Science, ABC University</small></p>
+                <p class="text-muted"><small>2. Institute of AI, XYZ Research Center</small></p>
+            </div>
         </div>
     </section>
+
 
     <!-- Abstract Section -->
     <section class="abstract-section py-5">
@@ -95,13 +117,37 @@
         </div>
     </section>
 
+    <div class="container text-center py-5">
+        <!-- 按钮组 -->
+        <div class="d-flex justify-content-center gap-3">
+            <!-- arXiv 按钮 -->
+            <a href="https://arxiv.org/pdf/2407.00631" class="btn btn-dark btn-lg" target="_blank">
+                <i class="fas fa-file-pdf me-2"></i>Paper
+            </a>
+
+            <!-- Code 按钮 -->
+            <a href="https://github.com/ML2Health/ML2ClinicalTrials/tree/main/AI4Trial" class="btn btn-dark btn-lg"
+                target="_blank">
+                <i class="fab fa-github me-2"></i>Code
+            </a>
+
+            <!-- Data 按钮 -->
+            <a href="dataset.zip" class="btn btn-dark btn-lg download-btn" data-key="all" id="downloadLink">
+                <i class="fas fa-database me-2"></i>Data
+            </a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (可选) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <!-- Download All Section -->
-    <div class="container text-center mb-5">
-        <a href="dataset.zip" class="btn btn-primary btn-sm download-btn" data-key="all" id="downloadLink">
+    <!-- <div class="container text-center mb-5">
+        <a href="dataset.zip" class="btn btn-dark btn-lg download-btn" data-key="all" id="downloadLink">
             Download All (ZIP)
         </a>
         <p class="mt-3">Downloads: <span id="all_count">(0)</span></p>
-    </div>
+    </div>  -->
 
     <!-- Download Sub-tasks Section -->
     <section class="download-subtasks py-5">
@@ -112,8 +158,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Trial Duration Forecasting
                     <div>
-                        <a href="trial_duration.zip" class="btn btn-primary btn-sm download-btn"
-                            data-key="trial_duration">
+                        <a href="trial_duration.zip" class="btn btn-dark btn-lg download-btn" data-key="trial_duration">
                             Download
                         </a>
                         <small class="text-muted ms-2" id="trial_duration_count">(0)</small>
@@ -124,7 +169,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Patient Dropout Event Forecasting
                     <div>
-                        <a href="patient_dropout.zip" class="btn btn-primary btn-sm download-btn"
+                        <a href="patient_dropout.zip" class="btn btn-dark btn-lg download-btn"
                             data-key="patient_dropout">
                             Download
                         </a>
@@ -136,7 +181,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Serious Adverse Event Forecasting
                     <div>
-                        <a href="serious_adverse.zip" class="btn btn-primary btn-sm download-btn"
+                        <a href="serious_adverse.zip" class="btn btn-dark btn-lg download-btn"
                             data-key="serious_adverse">
                             Download
                         </a>
@@ -148,7 +193,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Mortality Event Prediction
                     <div>
-                        <a href="mortality_prediction.zip" class="btn btn-primary btn-sm download-btn"
+                        <a href="mortality_prediction.zip" class="btn btn-dark btn-lg download-btn"
                             data-key="mortality_prediction">
                             Download
                         </a>
@@ -160,8 +205,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Trial Approval Forecasting
                     <div>
-                        <a href="trial_approval.zip" class="btn btn-primary btn-sm download-btn"
-                            data-key="trial_approval">
+                        <a href="trial_approval.zip" class="btn btn-dark btn-lg download-btn" data-key="trial_approval">
                             Download
                         </a>
                         <small class="text-muted ms-2" id="trial_approval_count">(0)</small>
@@ -172,8 +216,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Trial Failure Reason Identification
                     <div>
-                        <a href="trial_failure.zip" class="btn btn-primary btn-sm download-btn"
-                            data-key="trial_failure">
+                        <a href="trial_failure.zip" class="btn btn-dark btn-lg download-btn" data-key="trial_failure">
                             Download
                         </a>
                         <small class="text-muted ms-2" id="trial_failure_count">(0)</small>
@@ -184,7 +227,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Eligibility Criteria Design
                     <div>
-                        <a href="eligibility_criteria.zip" class="btn btn-primary btn-sm download-btn"
+                        <a href="eligibility_criteria.zip" class="btn btn-dark btn-lg download-btn"
                             data-key="eligibility_criteria">
                             Download
                         </a>
@@ -196,7 +239,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Drug Dose Finding
                     <div>
-                        <a href="drug_dose_finding.zip" class="btn btn-primary btn-sm download-btn"
+                        <a href="drug_dose_finding.zip" class="btn btn-dark btn-lg download-btn"
                             data-key="drug_dose_finding">
                             Download
                         </a>
@@ -680,6 +723,96 @@
         </div>
     </div>
 
+    <!-- 地图容器 -->
+    <div class="container mt-5">
+        <h3 class="text-center mb-4">Global Dataset Access Distribution</h3>
+        <div id="worldMap" style="height: 500px; width: 100%;"></div>
+    </div>
+
+    <!-- 引入必要库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js"></script>
+    <script>
+        // Firebase 配置（替换为你自己的配置）
+        const firebaseConfig = {
+            apiKey: "AIzaSyCEvdoo5F1MHdIKJzpl5pDiYMcJB-8BDyU",
+            authDomain: "trialbench.firebaseapp.com",
+            databaseURL: "https://trialbench-default-rtdb.firebaseio.com/",
+            projectId: "786037599501",
+            storageBucket: "trialbench.appspot.com",
+            messagingSenderId: "786037599501",
+            // appId: "1:1234567890:web:abcd1234efgh5678"
+        };
+
+        // 初始化 Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // 初始化地图
+        function initWorldMap(countryData) {
+            const chart = echarts.init(document.getElementById('worldMap'));
+
+            const option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{b}: {c}次访问'
+                },
+                visualMap: {
+                    min: 0,
+                    max: Math.max(...Object.values(countryData)),
+                    left: 'right',
+                    inRange: {
+                        color: ['#e0f3f8', '#abd9e9', '#74add1', '#4575b4', '#313695']
+                    },
+                    text: ['高', '低'],
+                    calculable: true
+                },
+                series: [{
+                    name: '访问次数',
+                    type: 'map',
+                    map: 'world',
+                    roam: true,
+                    data: Object.entries(countryData).map(([name, value]) => ({ name, value })),
+                    emphasis: {
+                        label: {
+                            show: true
+                        }
+                    }
+                }]
+            };
+
+            chart.setOption(option);
+        }
+
+        // 获取访问者国家并更新数据库
+        function trackCountry() {
+            // 获取国家代码（使用ipapi.co免费API）
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => {
+                    const countryCode = data.country_code;
+                    const updates = {};
+                    updates[countryCode] = firebase.database.ServerValue.increment(1);
+                    database.ref('countryVisits').update(updates);
+                })
+                .catch(error => console.error('Error tracking country:', error));
+        }
+
+        // 实时监听数据库变化
+        function setupRealtimeMap() {
+            database.ref('countryVisits').on('value', (snapshot) => {
+                const data = snapshot.val() || {};
+                initWorldMap(data);
+            });
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            trackCountry();     // 记录本次访问
+            setupRealtimeMap(); // 启动实时监听
+        });
+    </script>
 
 </body>
 
