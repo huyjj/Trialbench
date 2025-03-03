@@ -140,7 +140,7 @@
     <section class="abstract-section py-5">
         <div class="container">
             <h2 class="text-center mb-4">Abstract</h2>
-            <p class="lead text-center">
+            <p class="lead text-left">
                 Clinical trials are pivotal for developing new medical treatments but typically carry risks such as
                 patient mortality and enrollment failure that waste immense efforts spanning over a decade. Applying
                 artificial intelligence (AI) to predict key events in clinical trials holds great potential for
@@ -186,27 +186,11 @@
 
 </body>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Download Sub-tasks & World Map</title>
-    <!-- 引入 Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- 引入 Highcharts Maps 和相关模块 -->
-    <script src="https://code.highcharts.com/maps/highmaps.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-    <script src="https://code.highcharts.com/maps/modules/data.js"></script>
-    <!-- 如果使用旧的 GeoJSON 需要 Proj4js；若地图数据为 TopoJSON 可不加载 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.7.5/proj4.js"></script>
-    <!-- 引入世界地图数据 -->
-    <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
-</head>
-
 <body>
-
     <!-- Download Sub-tasks Section -->
     <section class="download-subtasks py-5">
         <div class="container">
-            <h2 class="text-center mb-4">Download Sub-tasks</h2>
+            <h2 class="text-center mb-4">Download SubTask Datasets</h2>
             <ul class="list-group">
                 <!-- 1. Trial Duration Forecasting -->
                 <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -216,7 +200,7 @@
                             class="btn btn-dark btn-lg download-btn" data-key="trial_duration">
                             Download
                         </a>
-                        <small class="text-muted ms-2" id="trial_duration_count">(0)</small>
+                        <small class="text-muted ms-2" id="trial_duration_count" style="display: none;">(0)</small>
                     </div>
                 </li>
 
@@ -228,7 +212,7 @@
                             class="btn btn-dark btn-lg download-btn" data-key="patient_dropout">
                             Download
                         </a>
-                        <small class="text-muted ms-2" id="patient_dropout_count">(0)</small>
+                        <small class="text-muted ms-2" id="patient_dropout_count" style="display: none;">(0)</small>
                     </div>
                 </li>
 
@@ -240,7 +224,7 @@
                             class="btn btn-dark btn-lg download-btn" data-key="serious_adverse">
                             Download
                         </a>
-                        <small class="text-muted ms-2" id="serious_adverse_count">(0)</small>
+                        <small class="text-muted ms-2" id="serious_adverse_count" style="display: none;">(0)</small>
                     </div>
                 </li>
 
@@ -252,7 +236,8 @@
                             class="btn btn-dark btn-lg download-btn" data-key="mortality_prediction">
                             Download
                         </a>
-                        <small class="text-muted ms-2" id="mortality_prediction_count">(0)</small>
+                        <small class="text-muted ms-2" id="mortality_prediction_count"
+                            style="display: none;">(0)</small>
                     </div>
                 </li>
 
@@ -264,7 +249,7 @@
                             class="btn btn-dark btn-lg download-btn" data-key="trial_approval">
                             Download
                         </a>
-                        <small class="text-muted ms-2" id="trial_approval_count">(0)</small>
+                        <small class="text-muted ms-2" id="trial_approval_count" style="display: none;">(0)</small>
                     </div>
                 </li>
 
@@ -276,7 +261,7 @@
                             class="btn btn-dark btn-lg download-btn" data-key="trial_failure">
                             Download
                         </a>
-                        <small class="text-muted ms-2" id="trial_failure_count">(0)</small>
+                        <small class="text-muted ms-2" id="trial_failure_count" style="display: none;">(0)</small>
                     </div>
                 </li>
 
@@ -288,7 +273,8 @@
                             class="btn btn-dark btn-lg download-btn" data-key="eligibility_criteria">
                             Download
                         </a>
-                        <small class="text-muted ms-2" id="eligibility_criteria_count">(0)</small>
+                        <small class="text-muted ms-2" id="eligibility_criteria_count"
+                            style="display: none;">(0)</small>
                     </div>
                 </li>
 
@@ -300,124 +286,15 @@
                             class="btn btn-dark btn-lg download-btn" data-key="drug_dose_finding">
                             Download
                         </a>
-                        <small class="text-muted ms-2" id="drug_dose_finding_count">(0)</small>
+                        <small class="text-muted ms-2" id="drug_dose_finding_count" style="display: none;">(0)</small>
                     </div>
                 </li>
             </ul>
         </div>
     </section>
 
-    <!-- World Map Section -->
-    <div id="mapContainer" style="height: 600px; min-width: 800px"></div>
-
-    <!-- 前端脚本 -->
-    <script>
-        // Cloudflare Worker URL（替换为你自己的 URL）
-        const API_URL = 'https://countryclicks.huuyjun.workers.dev';
-        let chart;
-        function initMap() {
-            chart = Highcharts.mapChart('mapContainer', {
-                chart: { map: 'custom/world' },
-                title: { text: 'Global Click Distribution' },
-                colorAxis: {
-                    min: 0,
-                    stops: [
-                        [0, '#EFEFFF'],
-                        [0.5, '#4444FF'],
-                        [1, '#000022']
-                    ]
-                },
-                series: [{
-                    data: [], // 初始化时先空
-                    name: 'Clicks',
-                    states: { hover: { color: '#a4edba' } },
-                    dataLabels: { enabled: true, format: '{point.name}' },
-                    tooltip: { valueSuffix: '' }
-                }]
-            });
-        }
-
-        // 2) 获取最新统计并更新地图
-        function fetchStatsAndUpdateMap() {
-            fetch(`${API_URL}/stats?global=true`)
-                .then(res => res.json())
-                .then(data => {
-                    // data = { "US": 12, "CN": 5, ... }
-                    const chartData = Object.entries(data).map(([countryCode, clicks]) => {
-                        return [countryCode.toLowerCase(), clicks];
-                    });
-                    chart.series[0].setData(chartData);
-                })
-                .catch(err => console.error('Error fetching stats:', err));
-        }
-
-        // 为所有 sub task 按钮添加计数逻辑
-        document.querySelectorAll('.download-btn').forEach(btn => {
-            const key = btn.getAttribute('data-key');  // 例如 "trial_duration"
-            const countSpan = document.getElementById(key + '_count');
-
-            // 页面加载时，获取当前单独计数（action=get）
-            fetch(`${API_URL}/hit?key=${key}&action=get`)
-                .then(res => res.json())
-                .then(data => {
-                    countSpan.textContent = `(${data.individual})`;
-                })
-                .catch(err => console.error(err));
-
-            // 点击时，先发起 "hit" 请求（action=hit），然后触发下载
-            btn.addEventListener('click', e => {
-                e.preventDefault();  // 阻止默认点击行为
-                fetch(`${API_URL}/hit?key=${key}&action=hit`)
-                    .then(res => res.json())
-                    .then(data => {
-                        // 更新单独计数
-                        countSpan.textContent = `(${data.individual})`;
-                        // 触发下载：创建临时链接点击
-                        const tempLink = document.createElement('a');
-                        tempLink.href = btn.href;
-                        tempLink.download = btn.href.split('/').pop();
-                        tempLink.click();
-                    })
-                    .catch(err => console.error(err));
-            });
-        });
-
-        // 加载世界地图：获取全局统计数据（global=true）
-        fetch(`${API_URL}/stats?global=true`)
-            .then(response => response.json())
-            .then(data => {
-                // data 格式为 { "us": 120, "in": 80, ... } ——注意 worker 中返回的国家代码为大写，转为小写
-                const chartData = Object.entries(data).map(([countryCode, clicks]) => {
-                    return [countryCode.toLowerCase(), clicks];
-                });
-
-                Highcharts.mapChart('mapContainer', {
-                    chart: { map: 'custom/world' },
-                    title: { text: 'Global Click Distribution' },
-                    colorAxis: {
-                        min: 0,
-                        stops: [
-                            [0, '#EFEFFF'],
-                            [0.5, '#4444FF'],
-                            [1, '#000022']
-                        ]
-                    },
-                    series: [{
-                        data: chartData,
-                        name: 'Clicks',
-                        states: { hover: { color: '#4444FF' } },
-                        dataLabels: { enabled: true, format: '{point.name}' },
-                        tooltip: { valueSuffix: '' }
-                    }]
-                });
-            })
-            .catch(err => console.error('Error fetching global stats:', err));
-    </script>
-
-</body>
-
-<body>
     <!-- Results Section -->
+
     <div class="container">
         <!-- Table 1 -->
         <div class="results-table">
@@ -850,6 +727,115 @@
             </p>
         </div>
     </div>
+
+
+
+    <meta charset="UTF-8">
+    <title>Download Sub-tasks & World Map</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.7.5/proj4.js"></script>
+    <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
+
+
+    <!-- World Map Section -->
+    <div id="mapContainer" style="height: 600px; min-width: 800px"></div>
+
+    <!-- 前端脚本 -->
+    <script>
+        // 替换为你的 Cloudflare Worker URL
+        const API_URL = "https://countryclicks.huuyjun.workers.dev";
+
+        // 记录网页访问次数（调用 visit 接口）
+        fetch(`${API_URL}/hit?type=visit&action=hit`)
+            .then(res => res.json())
+            .then(data => {
+                console.log("Page visit recorded for", data.country, ":", data.visits);
+            })
+            .catch(err => console.error('Error recording page visit:', err));
+
+        // 为所有下载按钮绑定点击事件
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            const key = btn.getAttribute('data-key');  // 例如 "trial_duration"
+            const countSpan = document.getElementById(key + '_count');
+
+            // 页面加载时获取当前下载计数（不增加）
+            fetch(`${API_URL}/hit?type=download&key=${key}&action=get`)
+                .then(res => res.json())
+                .then(data => {
+                    countSpan.textContent = `(${data.individual})`;
+                })
+                .catch(err => console.error(err));
+
+            // 点击时：先调用下载统计接口（action=hit），更新计数，再触发下载
+            btn.addEventListener('click', e => {
+                e.preventDefault();
+                fetch(`${API_URL}/hit?type=download&key=${key}&action=hit`)
+                    .then(res => res.json())
+                    .then(data => {
+                        countSpan.textContent = `(${data.individual})`;
+                        // 触发下载：创建临时链接点击
+                        const tempLink = document.createElement('a');
+                        tempLink.href = btn.href;
+                        tempLink.click();
+                    })
+                    .catch(err => console.error(err));
+            });
+        });
+
+        // 高charts地图变量
+        let chart;
+
+        // 初始化地图
+        function initMap(initialData) {
+            chart = Highcharts.mapChart('mapContainer', {
+                chart: { map: 'custom/world' },
+                title: { text: 'Global Page Visit Distribution' },
+                colorAxis: {
+                    min: 0,
+                    stops: [
+                        [0, '#EFEFFF'],
+                        [0.5, '#4444FF'],
+                        [1, '#000022']
+                    ]
+                },
+                series: [{
+                    data: initialData,
+                    name: 'Visits',
+                    states: { hover: { color: '#a4edba' } },
+                    dataLabels: { enabled: true, format: '{point.name}' },
+                    tooltip: { valueSuffix: '' }
+                }]
+            });
+        }
+
+        // 获取访问统计数据并更新地图
+        function fetchStatsAndUpdateMap() {
+            fetch(`${API_URL}/stats?type=visit`)
+                .then(response => response.json())
+                .then(data => {
+                    // 将数据转换为 Highcharts 格式：[ [ 'us', visits ], [ 'in', visits ], ... ]
+                    const chartData = Object.entries(data).map(([countryCode, visits]) => {
+                        return [countryCode.toLowerCase(), visits];
+                    });
+                    if (chart) {
+                        chart.series[0].setData(chartData);
+                    } else {
+                        initMap(chartData);
+                    }
+                })
+                .catch(err => console.error('Error fetching global stats:', err));
+        }
+
+        // 页面加载时获取一次统计数据
+        fetchStatsAndUpdateMap();
+
+        // 若希望实时更新，可设置定时器每隔一段时间刷新地图数据
+        // setInterval(fetchStatsAndUpdateMap, 30000); // 每 30 秒刷新一次
+    </script>
+
 </body>
 
 </html>
