@@ -69,14 +69,6 @@
 </head>
 
 <body>
-
-    <!-- Navigation -->
-    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">Trialbench</a>
-        </div>
-    </nav> -->
-
     <!-- Hero Section -->
     <section class="hero-section text-center">
         <div class="container">
@@ -161,26 +153,28 @@
     <div class="container text-center py-5">
         <!-- 按钮组 -->
         <div class="d-flex justify-content-center gap-3">
-            <!-- arXiv 按钮 -->
+            <!-- arXiv -->
             <a href="https://arxiv.org/pdf/2407.00631" class="btn btn-dark btn-lg" target="_blank">
                 <i class="fas fa-file-pdf me-2"></i>Paper
             </a>
 
-            <!-- Code 按钮 -->
+            <!-- Code -->
             <a href="https://github.com/ML2Health/ML2ClinicalTrials/tree/main/AI4Trial" class="btn btn-dark btn-lg"
                 target="_blank">
                 <i class="fab fa-github me-2"></i>Code
             </a>
 
-            <!-- Data 按钮 -->
+            <!-- Data -->
             <a href="https://zenodo.org/records/14960751/files/all_task.zip?download=1"
                 class="btn btn-dark btn-lg download-btn" data-key="all" id="downloadLink">
                 <i class="fas fa-database me-2"></i>Data
-                <!-- <small class="text-muted ms-2" id="all_count">(0)</small> -->
             </a>
         </div>
-        <small class="text-center mb-4" id="all_count" style="font-size: 0.8em; color: #6c757d;">(0)</small>
+        <small class="text-center mb-4" id="all_count" style="font-size: 0.8em; color: #6c757d;">
+            <span id="current_date"></span> Until 2025-3-4, data has been downloaded 0 times.
+        </small>
     </div>
+
 
     <!-- Bootstrap JS (可选) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -738,7 +732,7 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script src="https://code.highcharts.com/maps/modules/data.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.7.5/proj4.js"></script>
-    <script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
+    <script src="world.js"></script>
 
 
     <!-- World Map Section -->
@@ -757,43 +751,23 @@
             })
             .catch(err => console.error('Error recording page visit:', err));
 
-        // 为所有下载按钮绑定点击事件
-        // document.querySelectorAll('.download-btn').forEach(btn => {
-        //     const key = btn.getAttribute('data-key');  // 例如 "trial_duration"
-        //     const countSpan = document.getElementById(key + '_count');
-
-        //     // 页面加载时获取当前下载计数（不增加）
-        //     fetch(`${API_URL}/hit?type=download&key=${key}&action=get`)
-        //         .then(res => res.json())
-        //         .then(data => {
-        //             countSpan.textContent = `Downloaded ${data.individual} times`;
-        //         })
-        //         .catch(err => console.error(err));
-
-        //     // 点击时：先调用下载统计接口（action=hit），更新计数，再触发下载
-        //     btn.addEventListener('click', e => {
-        //         e.preventDefault();
-        //         fetch(`${API_URL}/hit?type=download&key=${key}&action=hit`)
-        //             .then(res => res.json())
-        //             .then(data => {
-        //                 countSpan.textContent = `(${data.individual})`;
-        //                 // 触发下载：创建临时链接点击
-        //                 const tempLink = document.createElement('a');
-        //                 tempLink.href = btn.href;
-        //                 tempLink.click();
-        //             })
-        //             .catch(err => console.error(err));
-        //     });
-        // });
         document.querySelectorAll('.download-btn').forEach(btn => {
             const key = btn.getAttribute('data-key');  // 例如 "trial_duration"
             const countSpan = document.getElementById(key + '_count');
+
+            // 获取当前日期并格式化为 YYYY-MM-DD 格式
+            const today = new Date();
+            const formattedDate = today.getFullYear() + '-' +
+                String(today.getMonth() + 1).padStart(2, '0') + '-' +
+                String(today.getDate()).padStart(2, '0');
+            // 将当前日期显示在 id="current_date" 的 span 中
+            document.getElementById('current_date').textContent = formattedDate;
 
             // 页面加载时获取当前下载计数（不增加）
             fetch(`${API_URL}/hit?type=download&key=${key}&action=get`)
                 .then(res => res.json())
                 .then(data => {
-                    countSpan.textContent = `Downloaded ${data.individual} times`;
+                    countSpan.textContent = `Until ${formattedDate}, data has been downloaded ${data.individual} times.`;
                 })
                 .catch(err => console.error(err));
 
@@ -803,7 +777,7 @@
                 fetch(`${API_URL}/hit?type=download&key=${key}&action=hit`)
                     .then(res => res.json())
                     .then(data => {
-                        countSpan.textContent = `Downloaded ${data.individual} times`;
+                        countSpan.textContent = `Until ${formattedDate}, data has been downloaded ${data.individual} times.`;//`Downloaded ${data.individual} times`;
 
                         // 触发下载：创建临时链接点击
                         const tempLink = document.createElement('a');
@@ -861,7 +835,6 @@
 
         // 页面加载时获取一次统计数据
         fetchStatsAndUpdateMap();
-
         // 若希望实时更新，可设置定时器每隔一段时间刷新地图数据
         // setInterval(fetchStatsAndUpdateMap, 30000); // 每 30 秒刷新一次
     </script>
