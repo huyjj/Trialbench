@@ -171,7 +171,7 @@
             </a>
         </div>
         <small class="text-center mb-4" id="all_count" style="font-size: 0.8em; color: #6c757d;">
-            <span id="current_date"></span> Until 2025-3-4, data has been downloaded 0 times.
+            Until 2025-3-4, data has been downloaded 0 times.
         </small>
     </div>
 
@@ -743,6 +743,24 @@
         // 替换为你的 Cloudflare Worker URL
         const API_URL = "https://countryclicks.huuyjun.workers.dev";
 
+        // 获取当前日期并格式化为 YYYY-MM-DD 格式
+        const today = new Date();
+        const formattedDate = today.getFullYear() + '-' +
+            String(today.getMonth() + 1).padStart(2, '0') + '-' +
+            String(today.getDate()).padStart(2, '0');
+
+        // 更新全局下载计数：调用 /hit?type=download&action=get
+        function updateGlobalDownloadCount() {
+            fetch(`${API_URL}/hit?type=download&action=get`)
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('all_count').textContent =
+                        `Until ${formattedDate}, data has been downloaded ${data.total} times.`;
+                })
+                .catch(err => console.error('Error fetching global download count:', err));
+        }
+        updateGlobalDownloadCount();
+
         // 记录网页访问次数（调用 visit 接口）
         fetch(`${API_URL}/hit?type=visit&action=hit`)
             .then(res => res.json())
@@ -755,29 +773,13 @@
             const key = btn.getAttribute('data-key');  // 例如 "trial_duration"
             const countSpan = document.getElementById(key + '_count');
 
-            // 获取当前日期并格式化为 YYYY-MM-DD 格式
-            const today = new Date();
-            const formattedDate = today.getFullYear() + '-' +
-                String(today.getMonth() + 1).padStart(2, '0') + '-' +
-                String(today.getDate()).padStart(2, '0');
-            // 将当前日期显示在 id="current_date" 的 span 中
-            document.getElementById('current_date').textContent = formattedDate;
-
-            // 页面加载时获取当前下载计数（不增加）
-            fetch(`${API_URL}/hit?type=download&key=${key}&action=get`)
-                .then(res => res.json())
-                .then(data => {
-                    countSpan.textContent = `Until ${formattedDate}, data has been downloaded ${data.global} times.`;
-                })
-                .catch(err => console.error(err));
-
             // 点击时：先调用下载统计接口（action=hit），更新计数，再触发下载
             btn.addEventListener('click', e => {
                 e.preventDefault();
-                fetch(`${API_URL}/hit?type=download&key=${key}&action=hit`)
+                fetch(`${API_URL}/hit?type=download&action=hit`)
                     .then(res => res.json())
                     .then(data => {
-                        countSpan.textContent = `Until ${formattedDate}, data has been downloaded ${data.global} times.`;//`Downloaded ${data.individual} times`;
+                        document.getElementById('all_count').textContent = `Until ${formattedDate}, data has been downloaded ${data.total} times.`;//`Downloaded ${data.individual} times`;
 
                         // 触发下载：创建临时链接点击
                         const tempLink = document.createElement('a');
