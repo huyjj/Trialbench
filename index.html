@@ -767,7 +767,7 @@
             fetch(`${API_URL}/hit?type=download&key=${key}&action=get`)
                 .then(res => res.json())
                 .then(data => {
-                    countSpan.textContent = `Until ${formattedDate}, data has been downloaded ${data.individual} times.`;
+                    countSpan.textContent = `Until ${formattedDate}, data has been downloaded ${data.global} times.`;
                 })
                 .catch(err => console.error(err));
 
@@ -777,7 +777,7 @@
                 fetch(`${API_URL}/hit?type=download&key=${key}&action=hit`)
                     .then(res => res.json())
                     .then(data => {
-                        countSpan.textContent = `Until ${formattedDate}, data has been downloaded ${data.individual} times.`;//`Downloaded ${data.individual} times`;
+                        countSpan.textContent = `Until ${formattedDate}, data has been downloaded ${data.global} times.`;//`Downloaded ${data.individual} times`;
 
                         // 触发下载：创建临时链接点击
                         const tempLink = document.createElement('a');
