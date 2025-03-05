@@ -175,42 +175,85 @@
         </small>
     </div>
 
-
     <!-- Bootstrap JS (可选) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
 <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <!-- Download Sub-tasks Section -->
     <section class="download-subtasks py-5">
         <div class="container">
             <h2 class="text-center mb-4">Download SubTask Datasets</h2>
             <ul class="list-group">
                 <!-- 1. Trial Duration Forecasting -->
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Trial Duration Forecasting
-                    <div>
-                        <a href="https://zenodo.org/records/14960751/files/trial-duration-forecasting.zip?download=1"
-                            class="btn btn-dark btn-lg download-btn" data-key="trial_duration">
-                            Download
-                        </a>
-                        <small class="text-muted ms-2" id="trial_duration_count" style="display: none;">(0)</small>
+                <li class="list-group-item">
+                    <!-- 任务标题和操作按钮 -->
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span>Trial Duration Forecasting</span>
+                        <div>
+                            <!-- 数据下载按钮 -->
+                            <a href="https://zenodo.org/records/14960751/files/trial-duration-forecasting.zip?download=1"
+                                class="btn btn-dark btn-lg download-btn" data-key="trial_duration">
+                                Download
+                            </a>
+                            <!-- PDF 展示切换按钮 -->
+                            <button class="btn btn-dark btn-lg" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#pdf_trial_duration" aria-expanded="false"
+                                aria-controls="pdf_trial_duration">
+                                Feature Set
+                            </button>
+                        </div>
                     </div>
-                </li>
+                    <!-- 可选：如果你想显示单独的下载统计（此处隐藏） -->
+                    <small class="text-muted ms-2" id="trial_duration_count" style="display: none;">(0)</small>
 
+                    <!-- 折叠区域，用于显示 PDF（使用 PDF.js 渲染） -->
+                    <!-- PDF 展示区域 -->
+                    <div class="collapse mt-2" id="pdf_trial_duration">
+                        <div class="card card-body">
+                            <canvas id="pdf_canvas_trial_duration"
+                                style="border: 1px solid #ccc; width: 100%;"></canvas>
+                            <!-- 缩放按钮 -->
+                            <!-- <div class="d-flex justify-content-center gap-2 mt-2">
+                                <button class="btn btn-secondary btn-sm zoom-in" data-pdf="trial_duration">Zoom
+                                    In</button>
+                                <button class="btn btn-secondary btn-sm zoom-out" data-pdf="trial_duration">Zoom
+                                    Out</button>
+                            </div> -->
+                        </div>
+                </li>
                 <!-- 2. Patient Dropout Event Forecasting -->
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Patient Dropout Event Forecasting
-                    <div>
-                        <a href="https://zenodo.org/records/14960751/files/patient-dropout-event-forecasting.zip?download=1"
-                            class="btn btn-dark btn-lg download-btn" data-key="patient_dropout">
-                            Download
-                        </a>
-                        <small class="text-muted ms-2" id="patient_dropout_count" style="display: none;">(0)</small>
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span>Patient Dropout Event Forecasting</span>
+                        <div>
+                            <a href="https://zenodo.org/records/14960751/files/patient-dropout-event-forecasting.zip?download=1"
+                                class="btn btn-dark btn-lg download-btn" data-key="patient_dropout">
+                                Download
+                            </a>
+                            <button class="btn btn-dark btn-lg" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#pdf_patient_dropout" aria-expanded="false"
+                                aria-controls="pdf_patient_dropout">
+                                Feature Set
+                            </button>
+                        </div>
+                    </div>
+                    <small class="text-muted ms-2" id="patient_dropout_count" style="display: none;">(0)</small>
+                    <div class="collapse mt-2" id="pdf_patient_dropout">
+                        <div class="card card-body">
+                            <canvas id="pdf_canvas_patient_dropout"
+                                style="border: 1px solid #ccc; width: 100%;"></canvas>
+                            <div class="d-flex justify-content-center gap-2 mt-2">
+                                <button class="btn btn-secondary btn-sm zoom-in" data-pdf="patient_dropout">Zoom
+                                    In</button>
+                                <button class="btn btn-secondary btn-sm zoom-out" data-pdf="patient_dropout">Zoom
+                                    Out</button>
+                            </div>
+                        </div>
                     </div>
                 </li>
-
                 <!-- 3. Serious Adverse Event Forecasting -->
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     Serious Adverse Event Forecasting
@@ -219,7 +262,24 @@
                             class="btn btn-dark btn-lg download-btn" data-key="serious_adverse">
                             Download
                         </a>
-                        <small class="text-muted ms-2" id="serious_adverse_count" style="display: none;">(0)</small>
+                        <button class="btn btn-dark btn-lg" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#pdf_serious_adverse" aria-expanded="false"
+                            aria-controls="pdf_serious_adverse">
+                            Feature Set
+                        </button>
+                    </div>
+                    <small class="text-muted ms-2" id="serious_adverse_count" style="display: none;">(0)</small>
+                    <div class="collapse mt-2" id="pdf_serious_adverse">
+                        <div class="card card-body">
+                            <canvas id="pdf_canvas_serious_adverse"
+                                style="border: 1px solid #ccc; width: 100%;"></canvas>
+                            <div class="d-flex justify-content-center gap-2 mt-2">
+                                <button class="btn btn-secondary btn-sm zoom-in" data-pdf="serious_adverse">Zoom
+                                    In</button>
+                                <button class="btn btn-secondary btn-sm zoom-out" data-pdf="serious_adverse">Zoom
+                                    Out</button>
+                            </div>
+                        </div>
                     </div>
                 </li>
 
@@ -231,8 +291,24 @@
                             class="btn btn-dark btn-lg download-btn" data-key="mortality_prediction">
                             Download
                         </a>
-                        <small class="text-muted ms-2" id="mortality_prediction_count"
-                            style="display: none;">(0)</small>
+                        <button class="btn btn-dark btn-lg" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#pdf_mortality_prediction" aria-expanded="false"
+                            aria-controls="pdf_mortality_prediction">
+                            Feature Set
+                        </button>
+                    </div>
+                    <small class="text-muted ms-2" id="mortality_prediction_count" style="display: none;">(0)</small>
+                    <div class="collapse mt-2" id="pdf_mortality_prediction">
+                        <div class="card card-body">
+                            <canvas id="pdf_canvas_mortality_prediction"
+                                style="border: 1px solid #ccc; width: 100%;"></canvas>
+                            <div class="d-flex justify-content-center gap-2 mt-2">
+                                <button class="btn btn-secondary btn-sm zoom-in" data-pdf="mortality_prediction">Zoom
+                                    In</button>
+                                <button class="btn btn-secondary btn-sm zoom-out" data-pdf="mortality_prediction">Zoom
+                                    Out</button>
+                            </div>
+                        </div>
                     </div>
                 </li>
 
@@ -244,7 +320,24 @@
                             class="btn btn-dark btn-lg download-btn" data-key="trial_approval">
                             Download
                         </a>
-                        <small class="text-muted ms-2" id="trial_approval_count" style="display: none;">(0)</small>
+                        <button class="btn btn-dark btn-lg" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#pdf_trial_approval" aria-expanded="false"
+                            aria-controls="pdf_trial_approval">
+                            Feature Set
+                        </button>
+                    </div>
+                    <small class="text-muted ms-2" id="trial_approval_count" style="display: none;">(0)</small>
+                    <div class="collapse mt-2" id="pdf_trial_approval">
+                        <div class="card card-body">
+                            <canvas id="pdf_canvas_trial_approval"
+                                style="border: 1px solid #ccc; width: 100%;"></canvas>
+                            <div class="d-flex justify-content-center gap-2 mt-2">
+                                <button class="btn btn-secondary btn-sm zoom-in" data-pdf="trial_approval">Zoom
+                                    In</button>
+                                <button class="btn btn-secondary btn-sm zoom-out" data-pdf="trial_approval">Zoom
+                                    Out</button>
+                            </div>
+                        </div>
                     </div>
                 </li>
 
@@ -256,7 +349,22 @@
                             class="btn btn-dark btn-lg download-btn" data-key="trial_failure">
                             Download
                         </a>
-                        <small class="text-muted ms-2" id="trial_failure_count" style="display: none;">(0)</small>
+                        <button class="btn btn-dark btn-lg" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#pdf_trial_failure" aria-expanded="false" aria-controls="pdf_trial_failure">
+                            Feature Set
+                        </button>
+                    </div>
+                    <small class="text-muted ms-2" id="trial_failure_count" style="display: none;">(0)</small>
+                    <div class="collapse mt-2" id="pdf_trial_failure">
+                        <div class="card card-body">
+                            <canvas id="pdf_canvas_trial_failure" style="border: 1px solid #ccc; width: 100%;"></canvas>
+                            <div class="d-flex justify-content-center gap-2 mt-2">
+                                <button class="btn btn-secondary btn-sm zoom-in" data-pdf="trial_failure">Zoom
+                                    In</button>
+                                <button class="btn btn-secondary btn-sm zoom-out" data-pdf="trial_failure">Zoom
+                                    Out</button>
+                            </div>
+                        </div>
                     </div>
                 </li>
 
@@ -268,8 +376,24 @@
                             class="btn btn-dark btn-lg download-btn" data-key="eligibility_criteria">
                             Download
                         </a>
-                        <small class="text-muted ms-2" id="eligibility_criteria_count"
-                            style="display: none;">(0)</small>
+                        <button class="btn btn-dark btn-lg" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#pdf_eligibility_criteria" aria-expanded="false"
+                            aria-controls="pdf_eligibility_criteria">
+                            Feature Set
+                        </button>
+                    </div>
+                    <small class="text-muted ms-2" id="eligibility_criteria_count" style="display: none;">(0)</small>
+                    <div class="collapse mt-2" id="pdf_eligibility_criteria">
+                        <div class="card card-body">
+                            <canvas id="pdf_canvas_eligibility_criteria"
+                                style="border: 1px solid #ccc; width: 100%;"></canvas>
+                            <div class="d-flex justify-content-center gap-2 mt-2">
+                                <button class="btn btn-secondary btn-sm zoom-in" data-pdf="eligibility_criteria">Zoom
+                                    In</button>
+                                <button class="btn btn-secondary btn-sm zoom-out" data-pdf="eligibility_criteria">Zoom
+                                    Out</button>
+                            </div>
+                        </div>
                     </div>
                 </li>
 
@@ -281,9 +405,27 @@
                             class="btn btn-dark btn-lg download-btn" data-key="drug_dose_finding">
                             Download
                         </a>
-                        <small class="text-muted ms-2" id="drug_dose_finding_count" style="display: none;">(0)</small>
+                        <button class="btn btn-dark btn-lg" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#pdf_drug_dose_finding" aria-expanded="false"
+                            aria-controls="pdf_drug_dose_finding">
+                            Feature Set
+                        </button>
+                    </div>
+                    <small class="text-muted ms-2" id="drug_dose_finding_count" style="display: none;">(0)</small>
+                    <div class="collapse mt-2" id="pdf_drug_dose_finding">
+                        <div class="card card-body">
+                            <canvas id="pdf_canvas_drug_dose_finding"
+                                style="border: 1px solid #ccc; width: 100%;"></canvas>
+                            <div class="d-flex justify-content-center gap-2 mt-2">
+                                <button class="btn btn-secondary btn-sm zoom-in" data-pdf="drug_dose_finding">Zoom
+                                    In</button>
+                                <button class="btn btn-secondary btn-sm zoom-out" data-pdf="drug_dose_finding">Zoom
+                                    Out</button>
+                            </div>
+                        </div>
                     </div>
                 </li>
+
             </ul>
         </div>
     </section>
@@ -723,10 +865,141 @@
         </div>
     </div>
 
+    <script>
+        // 定义每个 sub task 对应的 PDF 文件 URL
+        const pdfUrls = {
+            trial_duration: 'docs/trial-duration-prediction_.pdf',
+            patient_dropout: 'docs/patient-dropout-prediction_.pdf',
+            serious_adverse: 'docs/patient-dropout-prediction_.pdf',
+            eligibility_criteria: 'docs/eligibility-criteria-design_.pdf',
+            trial_failure: 'docs/trial-failure-reason-prediction_.pdf',
+            mortality_prediction: 'docs/patient-dropout-prediction_.pdf',
+            drug_dose_finding: 'docs/drug-dose-finding_.pdf',
+            trial_approval: 'docs/trial-approval-forecasting_.pdf',
+            drug_dose_finding: 'docs/drug-dose-prediction_.pdf',
+            // 其他任务...
+        };
+        // PDF.js 全局设置
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+
+        // 存储各个 sub task 的 PDF 文档和缩放比例
+        const pdfDocuments = {};
+
+        // 加载并渲染 PDF 的通用函数
+        function loadAndRenderPDF(pdfUrl, canvasId, scale) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc => {
+                pdfDocuments[canvasId] = { pdfDoc: pdfDoc, scale: scale || 1 };
+                renderPage(pdfDoc, 1, scale || 1, canvas, ctx);
+            }).catch(err => console.error('Error loading PDF:', err));
+        }
+
+        // 渲染 PDF 页面
+        function renderPage(pdfDoc, pageNum, scale, canvas, ctx) {
+            pdfDoc.getPage(pageNum).then(page => {
+                const viewport = page.getViewport({ scale: scale });
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                const renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+                page.render(renderContext);
+            });
+        }
+
+        // 缩放 PDF：更新指定 canvas 的缩放比例并重新渲染
+        function updatePDFZoom(canvasId, delta) {
+            if (!pdfDocuments[canvasId]) return;
+            pdfDocuments[canvasId].scale = Math.max(0.1, pdfDocuments[canvasId].scale + delta);
+            const { pdfDoc, scale } = pdfDocuments[canvasId];
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            renderPage(pdfDoc, 1, scale, canvas, ctx);
+        }
+
+        // 为所有放大和缩小按钮绑定事件
+        document.querySelectorAll('.zoom-in').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const pdfKey = btn.getAttribute('data-pdf'); // 例如 "trial_duration"
+                const canvasId = `pdf_canvas_${pdfKey}`;
+                updatePDFZoom(canvasId, 0.1);
+            });
+        });
+
+        document.querySelectorAll('.zoom-out').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const pdfKey = btn.getAttribute('data-pdf');
+                const canvasId = `pdf_canvas_${pdfKey}`;
+                updatePDFZoom(canvasId, -0.1);
+            });
+        });
+
+        // 当某个折叠区域展开时，加载对应的 PDF
+        // 这里以 Trial Duration 为例；为其他任务重复类似逻辑
+        const collapseTrialDuration = document.getElementById('pdf_trial_duration');
+        collapseTrialDuration.addEventListener('shown.bs.collapse', () => {
+            if (!pdfDocuments['pdf_canvas_trial_duration']) {
+                loadAndRenderPDF(pdfUrls['trial_duration'], 'pdf_canvas_trial_duration', 1);
+            }
+        });
+
+        // 对于其他 sub tasks，你可以为各自的 collapse 容器添加类似事件监听：
+        const collapsePatientDropout = document.getElementById('pdf_patient_dropout');
+        collapsePatientDropout.addEventListener('shown.bs.collapse', () => {
+            if (!pdfDocuments['pdf_canvas_patient_dropout']) {
+                loadAndRenderPDF(pdfUrls['patient_dropout'], 'pdf_canvas_patient_dropout', 1);
+            }
+        });
+
+        const collapseSeriousAdverse = document.getElementById('pdf_serious_adverse');
+        collapseSeriousAdverse.addEventListener('shown.bs.collapse', () => {
+            if (!pdfDocuments['pdf_canvas_serious_adverse']) {
+                loadAndRenderPDF(pdfUrls['serious_adverse'], 'pdf_canvas_serious_adverse', 1);
+            }
+        });
+
+        const collapseEligibilityCriteria = document.getElementById('pdf_eligibility_criteria');
+        collapseEligibilityCriteria.addEventListener('shown.bs.collapse', () => {
+            if (!pdfDocuments['pdf_canvas_eligibility_criteria']) {
+                loadAndRenderPDF(pdfUrls['eligibility_criteria'], 'pdf_canvas_eligibility_criteria', 1);
+            }
+        });
+
+        const collapseFailureReason = document.getElementById('pdf_trial_failure');
+        collapseFailureReason.addEventListener('shown.bs.collapse', () => {
+            if (!pdfDocuments['pdf_canvas_trial_failure']) {
+                loadAndRenderPDF(pdfUrls['trial_failure'], 'pdf_canvas_trial_failure', 1);
+            }
+        });
+
+        const collapseMortalityPrediction = document.getElementById('pdf_mortality_prediction');
+        collapseMortalityPrediction.addEventListener('shown.bs.collapse', () => {
+            if (!pdfDocuments['pdf_canvas_mortality_prediction']) {
+                loadAndRenderPDF(pdfUrls['mortality_prediction'], 'pdf_canvas_mortality_prediction', 1);
+            }
+        });
+
+        const collapseTrialApproval = document.getElementById('pdf_trial_approval');
+        collapseTrialApproval.addEventListener('shown.bs.collapse', () => {
+            if (!pdfDocuments['pdf_canvas_trial_approval']) {
+                loadAndRenderPDF(pdfUrls['trial_approval'], 'pdf_canvas_trial_approval', 1);
+            }
+        });
+
+        const collapseDrugDoseFinding = document.getElementById('pdf_drug_dose_finding');
+        collapseDrugDoseFinding.addEventListener('shown.bs.collapse', () => {
+            if (!pdfDocuments['pdf_canvas_drug_dose_finding']) {
+                loadAndRenderPDF(pdfUrls['drug_dose_finding'], 'pdf_canvas_drug_dose_finding', 1);
+            }
+        });
+
+    </script>
 
 
     <meta charset="UTF-8">
-    <title>Download Sub-tasks & World Map</title>
+    <title>World Map</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.highcharts.com/maps/highmaps.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
