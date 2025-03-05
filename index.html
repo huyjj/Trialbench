@@ -188,12 +188,10 @@
             <h2 class="text-center mb-4">Download SubTask Datasets</h2>
             <ul class="list-group">
                 <!-- 1. Trial Duration Forecasting -->
-                <li class="list-group-item">
-                    <!-- 任务标题和操作按钮 -->
+                <!-- <li class="list-group-item">
                     <div class="d-flex justify-content-between align-items-center">
                         <span>Trial Duration Forecasting</span>
                         <div>
-                            <!-- 数据下载按钮 -->
                             <a href="https://zenodo.org/records/14960751/files/trial-duration-forecasting.zip?download=1"
                                 class="btn btn-dark btn-lg download-btn" data-key="trial_duration">
                                 Download
@@ -206,7 +204,7 @@
                         </div>
                     </div>
                     <small class="text-muted ms-2" id="trial_duration_count" style="display: none;">(0)</small>
-                    <div class="collapse mt-2" id="pdf_trial_duration">
+                    <div class="collapse mt-2 max-auto" id="pdf_trial_duration" style="max-width: 800px;">
                         <div class="card card-body">
                             <canvas id="pdf_canvas_trial_duration"
                                 style="border: 1px solid #ccc; width: 100%;"></canvas>
@@ -219,8 +217,37 @@
                         </div>
                     </div>
                 </li>
+             -->
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Trial Duration Forecasting
+                    <div>
+                        <!-- 数据下载按钮 -->
+                        <a href="https://zenodo.org/records/14960751/files/trial-duration-forecasting.zip?download=1"
+                            class="btn btn-dark btn-lg download-btn" data-key="trial_duration">
+                            Download
+                        </a>
+                        <button class="btn btn-dark btn-lg" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#pdf_trial_duration" aria-expanded="false"
+                            aria-controls="pdf_trial_duration">
+                            Feature Set
+                        </button>
+                    </div>
+                    <small class="text-muted ms-2" id="trial_duration_count" style="display: none;">(0)</small>
+                    <div class="collapse mt-2 max-auto" id="pdf_trial_duration" style="max-width: 800px;">
+                        <div class="card card-body">
+                            <div class="d-flex justify-content-center gap-2 mt-2">
+                                <button class="btn btn-secondary btn-sm zoom-in" data-pdf="trial_duration">Zoom
+                                    In</button>
+                                <button class="btn btn-secondary btn-sm zoom-out" data-pdf="trial_duration">Zoom
+                                    Out</button>
+                            </div>
+                            <canvas id="pdf_canvas_trial_duration"
+                                style="border: 1px solid #ccc; width: 100%;"></canvas>
+                        </div>
+                    </div>
+                </li>
                 <!-- 2. Patient Dropout Event Forecasting -->
-                <li class="list-group-item">
+                <!-- <li class="list-group-item">
                     <div class="d-flex justify-content-between align-items-center">
                         <span>Patient Dropout Event Forecasting</span>
                         <div>
@@ -236,16 +263,45 @@
                         </div>
                     </div>
                     <small class="text-muted ms-2" id="patient_dropout_count" style="display: none;">(0)</small>
-                    <div class="collapse mt-2" id="pdf_patient_dropout">
+                    <div class="collapse mt-2 max-auto" id="pdf_patient_dropout" style="max-width: 800px;">
                         <div class="card card-body">
-                            <canvas id="pdf_canvas_patient_dropout"
-                                style="border: 1px solid #ccc; width: 100%;"></canvas>
                             <div class="d-flex justify-content-center gap-2 mt-2">
                                 <button class="btn btn-secondary btn-sm zoom-in" data-pdf="patient_dropout">Zoom
                                     In</button>
                                 <button class="btn btn-secondary btn-sm zoom-out" data-pdf="patient_dropout">Zoom
                                     Out</button>
                             </div>
+                            <canvas id="pdf_canvas_patient_dropout"
+                                style="border: 1px solid #ccc; width: 100%;"></canvas>
+
+                        </div>
+                    </div>
+                </li> -->
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Patient Dropout Event Forecasting
+                    <div>
+                        <a href="https://zenodo.org/records/14960751/files/patient-dropout-event-forecasting.zip?download=1"
+                            class="btn btn-dark btn-lg download-btn" data-key="patient_dropout">
+                            Download
+                        </a>
+                        <button class="btn btn-dark btn-lg" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#pdf_patient_dropout" aria-expanded="false"
+                            aria-controls="pdf_patient_dropout">
+                            Feature Set
+                        </button>
+                    </div>
+                    <small class="text-muted ms-2" id="patient_dropout_count" style="display: none;">(0)</small>
+                    <div class="collapse mt-2 max-auto" id="pdf_patient_dropout" style="max-width: 800px;">
+                        <div class="card card-body">
+                            <div class="d-flex justify-content-center gap-2 mt-2">
+                                <button class="btn btn-secondary btn-sm zoom-in" data-pdf="patient_dropout">Zoom
+                                    In</button>
+                                <button class="btn btn-secondary btn-sm zoom-out" data-pdf="patient_dropout">Zoom
+                                    Out</button>
+                            </div>
+                            <canvas id="pdf_canvas_patient_dropout"
+                                style="border: 1px solid #ccc; width: 100%;"></canvas>
+
                         </div>
                     </div>
                 </li>
@@ -264,16 +320,16 @@
                         </button>
                     </div>
                     <small class="text-muted ms-2" id="serious_adverse_count" style="display: none;">(0)</small>
-                    <div class="collapse mt-2" id="pdf_serious_adverse">
+                    <div class="collapse mt-2 max-auto" id="pdf_serious_adverse" style="max-width: 800px;">
                         <div class="card card-body">
-                            <canvas id="pdf_canvas_serious_adverse"
-                                style="border: 1px solid #ccc; width: 100%;"></canvas>
                             <div class="d-flex justify-content-center gap-2 mt-2">
                                 <button class="btn btn-secondary btn-sm zoom-in" data-pdf="serious_adverse">Zoom
                                     In</button>
                                 <button class="btn btn-secondary btn-sm zoom-out" data-pdf="serious_adverse">Zoom
                                     Out</button>
                             </div>
+                            <canvas id="pdf_canvas_serious_adverse"
+                                style="border: 1px solid #ccc; width: 100%;"></canvas>
                         </div>
                     </div>
                 </li>
@@ -293,16 +349,16 @@
                         </button>
                     </div>
                     <small class="text-muted ms-2" id="mortality_prediction_count" style="display: none;">(0)</small>
-                    <div class="collapse mt-2" id="pdf_mortality_prediction">
+                    <div class="collapse mt-2 max-auto" id="pdf_mortality_prediction" style="max-width: 800px;">
                         <div class="card card-body">
-                            <canvas id="pdf_canvas_mortality_prediction"
-                                style="border: 1px solid #ccc; width: 100%;"></canvas>
                             <div class="d-flex justify-content-center gap-2 mt-2">
                                 <button class="btn btn-secondary btn-sm zoom-in" data-pdf="mortality_prediction">Zoom
                                     In</button>
                                 <button class="btn btn-secondary btn-sm zoom-out" data-pdf="mortality_prediction">Zoom
                                     Out</button>
                             </div>
+                            <canvas id="pdf_canvas_mortality_prediction"
+                                style="border: 1px solid #ccc; width: 100%;"></canvas>
                         </div>
                     </div>
                 </li>
@@ -322,16 +378,16 @@
                         </button>
                     </div>
                     <small class="text-muted ms-2" id="trial_approval_count" style="display: none;">(0)</small>
-                    <div class="collapse mt-2" id="pdf_trial_approval">
+                    <div class="collapse mt-2 max-auto" id="pdf_trial_approval" style="max-width: 800px;">
                         <div class="card card-body">
-                            <canvas id="pdf_canvas_trial_approval"
-                                style="border: 1px solid #ccc; width: 100%;"></canvas>
                             <div class="d-flex justify-content-center gap-2 mt-2">
                                 <button class="btn btn-secondary btn-sm zoom-in" data-pdf="trial_approval">Zoom
                                     In</button>
                                 <button class="btn btn-secondary btn-sm zoom-out" data-pdf="trial_approval">Zoom
                                     Out</button>
                             </div>
+                            <canvas id="pdf_canvas_trial_approval"
+                                style="border: 1px solid #ccc; width: 100%;"></canvas>
                         </div>
                     </div>
                 </li>
@@ -350,7 +406,7 @@
                         </button>
                     </div>
                     <small class="text-muted ms-2" id="trial_failure_count" style="display: none;">(0)</small>
-                    <div class="collapse mt-2" id="pdf_trial_failure">
+                    <div class="collapse mt-2 max-auto" id="pdf_trial_failure" style="max-width: 800px;">
                         <div class="card card-body">
                             <canvas id="pdf_canvas_trial_failure" style="border: 1px solid #ccc; width: 100%;"></canvas>
                             <div class="d-flex justify-content-center gap-2 mt-2">
@@ -378,16 +434,16 @@
                         </button>
                     </div>
                     <small class="text-muted ms-2" id="eligibility_criteria_count" style="display: none;">(0)</small>
-                    <div class="collapse mt-2" id="pdf_eligibility_criteria">
+                    <div class="collapse mt-2 mx-auto" id="pdf_eligibility_criteria" style="max-width: 800px;">
                         <div class="card card-body">
-                            <canvas id="pdf_canvas_eligibility_criteria"
-                                style="border: 1px solid #ccc; width: 100%;"></canvas>
                             <div class="d-flex justify-content-center gap-2 mt-2">
                                 <button class="btn btn-secondary btn-sm zoom-in" data-pdf="eligibility_criteria">Zoom
                                     In</button>
                                 <button class="btn btn-secondary btn-sm zoom-out" data-pdf="eligibility_criteria">Zoom
                                     Out</button>
                             </div>
+                            <canvas id="pdf_canvas_eligibility_criteria"
+                                style="border: 1px solid #ccc; width: 100%;"></canvas>
                         </div>
                     </div>
                 </li>
@@ -407,16 +463,17 @@
                         </button>
                     </div>
                     <small class="text-muted ms-2" id="drug_dose_finding_count" style="display: none;">(0)</small>
-                    <div class="collapse mt-2" id="pdf_drug_dose_finding">
+                    <div class="collapse mt-2 mx-auto" id="pdf_drug_dose_finding" style="max-width: 800px;">
                         <div class="card card-body">
-                            <canvas id="pdf_canvas_drug_dose_finding"
-                                style="border: 1px solid #ccc; width: 100%;"></canvas>
                             <div class="d-flex justify-content-center gap-2 mt-2">
                                 <button class="btn btn-secondary btn-sm zoom-in" data-pdf="drug_dose_finding">Zoom
                                     In</button>
                                 <button class="btn btn-secondary btn-sm zoom-out" data-pdf="drug_dose_finding">Zoom
                                     Out</button>
                             </div>
+                            <canvas id="pdf_canvas_drug_dose_finding"
+                                style="border: 1px solid #ccc; width: 100%;"></canvas>
+
                         </div>
                     </div>
                 </li>
@@ -870,7 +927,7 @@
             trial_failure: 'docs/trial-failure-reason-prediction_.pdf',
             mortality_prediction: 'docs/patient-dropout-prediction_.pdf',
             drug_dose_finding: 'docs/drug-dose-finding_.pdf',
-            trial_approval: 'docs/trial-approval-forecasting_.pdf',
+            trial_approval: 'docs/trial-approval-prediction_.pdf',
             drug_dose_finding: 'docs/drug-dose-prediction_.pdf',
             // 其他任务...
         };
@@ -936,7 +993,7 @@
         const collapseTrialDuration = document.getElementById('pdf_trial_duration');
         collapseTrialDuration.addEventListener('shown.bs.collapse', () => {
             if (!pdfDocuments['pdf_canvas_trial_duration']) {
-                loadAndRenderPDF(pdfUrls['trial_duration'], 'pdf_canvas_trial_duration', 0.5);
+                loadAndRenderPDF(pdfUrls['trial_duration'], 'pdf_canvas_trial_duration', 1);
             }
         });
 
@@ -944,49 +1001,49 @@
         const collapsePatientDropout = document.getElementById('pdf_patient_dropout');
         collapsePatientDropout.addEventListener('shown.bs.collapse', () => {
             if (!pdfDocuments['pdf_canvas_patient_dropout']) {
-                loadAndRenderPDF(pdfUrls['patient_dropout'], 'pdf_canvas_patient_dropout', 0.5);
+                loadAndRenderPDF(pdfUrls['patient_dropout'], 'pdf_canvas_patient_dropout', 1);
             }
         });
 
         const collapseSeriousAdverse = document.getElementById('pdf_serious_adverse');
         collapseSeriousAdverse.addEventListener('shown.bs.collapse', () => {
             if (!pdfDocuments['pdf_canvas_serious_adverse']) {
-                loadAndRenderPDF(pdfUrls['serious_adverse'], 'pdf_canvas_serious_adverse', 0.5);
+                loadAndRenderPDF(pdfUrls['serious_adverse'], 'pdf_canvas_serious_adverse', 1);
             }
         });
 
         const collapseEligibilityCriteria = document.getElementById('pdf_eligibility_criteria');
         collapseEligibilityCriteria.addEventListener('shown.bs.collapse', () => {
             if (!pdfDocuments['pdf_canvas_eligibility_criteria']) {
-                loadAndRenderPDF(pdfUrls['eligibility_criteria'], 'pdf_canvas_eligibility_criteria', 0.5);
+                loadAndRenderPDF(pdfUrls['eligibility_criteria'], 'pdf_canvas_eligibility_criteria', 1);
             }
         });
 
         const collapseFailureReason = document.getElementById('pdf_trial_failure');
         collapseFailureReason.addEventListener('shown.bs.collapse', () => {
             if (!pdfDocuments['pdf_canvas_trial_failure']) {
-                loadAndRenderPDF(pdfUrls['trial_failure'], 'pdf_canvas_trial_failure', 0.5);
+                loadAndRenderPDF(pdfUrls['trial_failure'], 'pdf_canvas_trial_failure', 1);
             }
         });
 
         const collapseMortalityPrediction = document.getElementById('pdf_mortality_prediction');
         collapseMortalityPrediction.addEventListener('shown.bs.collapse', () => {
             if (!pdfDocuments['pdf_canvas_mortality_prediction']) {
-                loadAndRenderPDF(pdfUrls['mortality_prediction'], 'pdf_canvas_mortality_prediction', 0.5);
+                loadAndRenderPDF(pdfUrls['mortality_prediction'], 'pdf_canvas_mortality_prediction', 1);
             }
         });
 
         const collapseTrialApproval = document.getElementById('pdf_trial_approval');
         collapseTrialApproval.addEventListener('shown.bs.collapse', () => {
             if (!pdfDocuments['pdf_canvas_trial_approval']) {
-                loadAndRenderPDF(pdfUrls['trial_approval'], 'pdf_canvas_trial_approval', 0.5);
+                loadAndRenderPDF(pdfUrls['trial_approval'], 'pdf_canvas_trial_approval', 1);
             }
         });
 
         const collapseDrugDoseFinding = document.getElementById('pdf_drug_dose_finding');
         collapseDrugDoseFinding.addEventListener('shown.bs.collapse', () => {
             if (!pdfDocuments['pdf_canvas_drug_dose_finding']) {
-                loadAndRenderPDF(pdfUrls['drug_dose_finding'], 'pdf_canvas_drug_dose_finding', 0.5);
+                loadAndRenderPDF(pdfUrls['drug_dose_finding'], 'pdf_canvas_drug_dose_finding', 1);
             }
         });
 
