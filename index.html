@@ -198,7 +198,6 @@
                                 class="btn btn-dark btn-lg download-btn" data-key="trial_duration">
                                 Download
                             </a>
-                            <!-- PDF 展示切换按钮 -->
                             <button class="btn btn-dark btn-lg" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#pdf_trial_duration" aria-expanded="false"
                                 aria-controls="pdf_trial_duration">
@@ -206,23 +205,19 @@
                             </button>
                         </div>
                     </div>
-                    <!-- 可选：如果你想显示单独的下载统计（此处隐藏） -->
                     <small class="text-muted ms-2" id="trial_duration_count" style="display: none;">(0)</small>
-
-                    <!-- 折叠区域，用于显示 PDF（使用 PDF.js 渲染） -->
-                    <!-- PDF 展示区域 -->
                     <div class="collapse mt-2" id="pdf_trial_duration">
                         <div class="card card-body">
                             <canvas id="pdf_canvas_trial_duration"
                                 style="border: 1px solid #ccc; width: 100%;"></canvas>
-                            <!-- 缩放按钮 -->
-                            <!-- <div class="d-flex justify-content-center gap-2 mt-2">
+                            <div class="d-flex justify-content-center gap-2 mt-2">
                                 <button class="btn btn-secondary btn-sm zoom-in" data-pdf="trial_duration">Zoom
                                     In</button>
                                 <button class="btn btn-secondary btn-sm zoom-out" data-pdf="trial_duration">Zoom
                                     Out</button>
-                            </div> -->
+                            </div>
                         </div>
+                    </div>
                 </li>
                 <!-- 2. Patient Dropout Event Forecasting -->
                 <li class="list-group-item">
@@ -941,7 +936,7 @@
         const collapseTrialDuration = document.getElementById('pdf_trial_duration');
         collapseTrialDuration.addEventListener('shown.bs.collapse', () => {
             if (!pdfDocuments['pdf_canvas_trial_duration']) {
-                loadAndRenderPDF(pdfUrls['trial_duration'], 'pdf_canvas_trial_duration', 1);
+                loadAndRenderPDF(pdfUrls['trial_duration'], 'pdf_canvas_trial_duration', 0.5);
             }
         });
 
@@ -949,49 +944,49 @@
         const collapsePatientDropout = document.getElementById('pdf_patient_dropout');
         collapsePatientDropout.addEventListener('shown.bs.collapse', () => {
             if (!pdfDocuments['pdf_canvas_patient_dropout']) {
-                loadAndRenderPDF(pdfUrls['patient_dropout'], 'pdf_canvas_patient_dropout', 1);
+                loadAndRenderPDF(pdfUrls['patient_dropout'], 'pdf_canvas_patient_dropout', 0.5);
             }
         });
 
         const collapseSeriousAdverse = document.getElementById('pdf_serious_adverse');
         collapseSeriousAdverse.addEventListener('shown.bs.collapse', () => {
             if (!pdfDocuments['pdf_canvas_serious_adverse']) {
-                loadAndRenderPDF(pdfUrls['serious_adverse'], 'pdf_canvas_serious_adverse', 1);
+                loadAndRenderPDF(pdfUrls['serious_adverse'], 'pdf_canvas_serious_adverse', 0.5);
             }
         });
 
         const collapseEligibilityCriteria = document.getElementById('pdf_eligibility_criteria');
         collapseEligibilityCriteria.addEventListener('shown.bs.collapse', () => {
             if (!pdfDocuments['pdf_canvas_eligibility_criteria']) {
-                loadAndRenderPDF(pdfUrls['eligibility_criteria'], 'pdf_canvas_eligibility_criteria', 1);
+                loadAndRenderPDF(pdfUrls['eligibility_criteria'], 'pdf_canvas_eligibility_criteria', 0.5);
             }
         });
 
         const collapseFailureReason = document.getElementById('pdf_trial_failure');
         collapseFailureReason.addEventListener('shown.bs.collapse', () => {
             if (!pdfDocuments['pdf_canvas_trial_failure']) {
-                loadAndRenderPDF(pdfUrls['trial_failure'], 'pdf_canvas_trial_failure', 1);
+                loadAndRenderPDF(pdfUrls['trial_failure'], 'pdf_canvas_trial_failure', 0.5);
             }
         });
 
         const collapseMortalityPrediction = document.getElementById('pdf_mortality_prediction');
         collapseMortalityPrediction.addEventListener('shown.bs.collapse', () => {
             if (!pdfDocuments['pdf_canvas_mortality_prediction']) {
-                loadAndRenderPDF(pdfUrls['mortality_prediction'], 'pdf_canvas_mortality_prediction', 1);
+                loadAndRenderPDF(pdfUrls['mortality_prediction'], 'pdf_canvas_mortality_prediction', 0.5);
             }
         });
 
         const collapseTrialApproval = document.getElementById('pdf_trial_approval');
         collapseTrialApproval.addEventListener('shown.bs.collapse', () => {
             if (!pdfDocuments['pdf_canvas_trial_approval']) {
-                loadAndRenderPDF(pdfUrls['trial_approval'], 'pdf_canvas_trial_approval', 1);
+                loadAndRenderPDF(pdfUrls['trial_approval'], 'pdf_canvas_trial_approval', 0.5);
             }
         });
 
         const collapseDrugDoseFinding = document.getElementById('pdf_drug_dose_finding');
         collapseDrugDoseFinding.addEventListener('shown.bs.collapse', () => {
             if (!pdfDocuments['pdf_canvas_drug_dose_finding']) {
-                loadAndRenderPDF(pdfUrls['drug_dose_finding'], 'pdf_canvas_drug_dose_finding', 1);
+                loadAndRenderPDF(pdfUrls['drug_dose_finding'], 'pdf_canvas_drug_dose_finding', 0.5);
             }
         });
 
