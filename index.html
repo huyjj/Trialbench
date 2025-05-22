@@ -430,6 +430,52 @@
         </div>
     </section>
 
+    <section class="download-code py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Download SubTask Datasets by Python/R code</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <h3 class="text-center">Python</h3>
+                    <pre class="bg-light p-3"><code class="language-python">
+import trialbench
+
+# Download all datasets at once (optional)
+save_path = 'data/'
+trialbench.function.download_all_data(save_path)
+                        
+# Load dataset
+task = 'dose'
+phase = 'All'
+                        
+# Load dataloader.Dataloader 
+train_loader, valid_loader, test_loader, num_classes, tabular_input_dim = trialbench.function.load_data(task, phase, data_format='dl')
+# or Load pd.Dataframe
+train_df, valid_df, test_df, num_classes, tabular_input_dim = trialbench.function.load_data(task, phase, data_format='df')
+                </code></pre>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h3 class="text-center">R</h3>
+                    <pre class="bg-light p-3"><code class="language-r">
+# Source the <function.R> first
+source("your_path_to/r.trialbench/R/function.R", encoding = "UTF-8")
+                            
+# Download datasets (optional)
+save_path <- "data/"
+download_all_data(save_path)
+# Load dataset
+task <- "dose"
+phase <- "All"
+                            
+# Retrieve DataFrames
+data_list <- load_data(task, phase)
+train_df <- data_list$train_df
+valid_df <- data_list$valid_df
+test_df <- data_list$test_df
+                </code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Results Section -->
 
     <div class="container">
