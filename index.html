@@ -73,7 +73,134 @@
         .author-info small {
             font-size: 0.6rem;
         }
+
+        /* <> */
+
+        .main-section {
+            /* max-width: 2000px; */
+            /* margin: 60px auto 0 auto; */
+            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            overflow-x: auto;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .card-block {
+            background: #fcfcfd;
+            border-radius: 22px;
+            box-shadow: 0 6px 32px 0 rgba(240, 240, 240, 0.08);
+            padding: 40px 32px 36px 32px;
+            margin-bottom: 36px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            text-align: center;
+            font-weight: 800;
+            margin-bottom: 44px;
+            font-size: 2.15rem;
+            color: #20242c;
+            letter-spacing: 0.01em;
+        }
+
+        .lang-title {
+            display: flex;
+            align-items: center;
+            font-size: 1.34rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            gap: 9px;
+            color: #253046;
+        }
+
+        .step-list {
+            line-height: 2.0;
+            margin: 0;
+            padding-left: 24px;
+            color: #253046;
+            font-size: 1.04rem;
+        }
+
+        .step-list li {
+            margin-bottom: 16px;
+        }
+
+        .inline-code {
+            background: #fafbfc;
+            color: #060606;
+            border-radius: 7px;
+            padding: 2.5px 7px;
+            font-family: 'JetBrains Mono', 'Fira Mono', 'Menlo', monospace;
+            font-size: 1.0em;
+            margin: 0 3px;
+            word-break: break-all;
+            display: inline-block;
+        }
+
+        .step-list a {
+            color: #3565c9;
+            text-decoration: underline dotted;
+            font-weight: 500;
+        }
+
+        .copy-block {
+            width: 100%;
+            box-sizing: border-box;
+            background: #23272e;
+            color: #f8f8fa;
+            border-radius: 13px;
+            padding: 16px 18px 16px 18px;
+            font-family: 'JetBrains Mono', 'Fira Mono', 'Menlo', monospace;
+            font-size: 1.07rem;
+            overflow-x: auto;
+            margin-top: 8px;
+            margin-bottom: 2px;
+            line-height: 1.74;
+            box-shadow: 0 2px 6px 0 rgba(35, 40, 60, 0.07);
+            display: block;
+            min-width: 0;
+            word-break: break-all;
+            white-space: pre;
+        }
+
+        .step-tip {
+            color: #050505;
+            font-size: 1.0 rem;
+            margin-top: 2px;
+            margin-bottom: 0;
+            line-height: 1.2;
+        }
+
+        @media (max-width: 640px) {
+            .main-section {
+                padding: 0 2vw;
+            }
+
+            .card-block {
+                padding: 20px 5vw 20px 5vw;
+                border-radius: 12px;
+            }
+
+            .copy-block {
+                font-size: 0.93rem;
+                padding: 11px 7px 11px 9px;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+                margin-bottom: 30px;
+            }
+
+            .lang-title {
+                font-size: 1.12rem;
+                margin-bottom: 12px;
+                gap: 7px;
+            }
+        }
     </style>
+
 </head>
 
 <body>
@@ -430,52 +557,101 @@
         </div>
     </section>
 
-    <section class="download-code py-5">
-        <div class="container">
-            <h2 class="text-center mb-4">Download SubTask Datasets by Python/R code</h2>
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <h3 class="text-center">Python</h3>
-                    <pre class="bg-light p-3"><code class="language-python">
-import trialbench
 
-# Download all datasets at once (optional)
-save_path = 'data/'
-trialbench.function.download_all_data(save_path)
-                        
-# Load dataset
+    <div class="main-section">
+        <h2>Download SubTask Datasets: Python &amp; R Instructions</h2>
+
+        <div class="card-block">
+            <div class="lang-title">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="40">
+                Python
+            </div>
+            <ol class="step-list">
+                <li>
+                    Install <span class="inline-code">trialbench</span>:
+                    <div class="copy-block">pip install trialbench</div>
+                </li>
+                <li>
+                    Manually download <span class="inline-code">mesh_embeddings.txt.gz</span>:
+                    <br>
+                    <a href="https://github.com/ML2Health/ML2ClinicalTrials/raw/refs/heads/main/Trialbench/data/mesh-embeddings/mesh_embeddings.txt.gz"
+                        target="_blank">Download mesh_embeddings.txt.gz</a>
+                    <div class="step-tip">
+                        Copy it to the <span class="inline-code">trialbench</span> data directory:
+                    </div>
+                    <div class="copy-block">cp mesh_embeddings.txt.gz your_path_to/miniconda3/envs/trialbench/lib/python3.10/site-packages/trialbench/data/mesh-embeddings/</div>
+                </li>
+                <li>
+                    Download and load datasets:
+                    <div class="copy-block">import trialbench
+
+# Download all datasets (optional)
+trialbench.function.download_all_data('data/')
+
+# Load data
 task = 'dose'
 phase = 'All'
-                        
-# Load dataloader.Dataloader 
+
+# Dataloader format
 train_loader, valid_loader, test_loader, num_classes, tabular_input_dim = trialbench.function.load_data(task, phase, data_format='dl')
-# or Load pd.Dataframe
-train_df, valid_df, test_df, num_classes, tabular_input_dim = trialbench.function.load_data(task, phase, data_format='df')
-                </code></pre>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <h3 class="text-center">R</h3>
-                    <pre class="bg-light p-3"><code class="language-r">
-# Source the <function.R> first
-source("your_path_to/r.trialbench/R/function.R", encoding = "UTF-8")
-                            
-# Download datasets (optional)
-save_path <- "data/"
-download_all_data(save_path)
-# Load dataset
-task <- "dose"
-phase <- "All"
-                            
-# Retrieve DataFrames
-data_list <- load_data(task, phase)
-train_df <- data_list$train_df
-valid_df <- data_list$valid_df
-test_df <- data_list$test_df
-                </code></pre>
-                </div>
-            </div>
+
+# Or as Pandas DataFrame
+train_df, valid_df, test_df, num_classes, tabular_input_dim = trialbench.function.load_data(task, phase, data_format='df')</div>
+                </li>
+            </ol>
         </div>
-    </section>
+        <!-- <h2>Download SubTask Datasets: R Instructions</h2> -->
+        <div class="card-block">
+            <div class="lang-title">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg" width="40">
+                R
+            </div>
+            <ol class="step-list">
+                <li>
+                    Download R package:<br>
+                    Please download <span class="inline-code">r.trialbench_0.0.0.9000.tar.gz</span> from
+                    <a href="https://github.com/ML2Health/ML2ClinicalTrials/raw/refs/heads/main/Trialbench/packages/r.trialbench_0.0.0.9000.tar.gz"
+                        target="_blank">here</a>.<br>
+                    After downloading, decompress it:
+                    <div class="copy-block">tar -xzvf r.trialbench_0.0.0.9000.tar.gz</div>
+                </li>
+                <li>
+                    Install dependencies and Python environment:
+                    <div class="copy-block">install.packages("reticulate")
+library(reticulate)
+conda_create("r_trialbench", python_version = "3.10")
+use_condaenv("r_trialbench")
+reticulate::py_install("trialbench", pip = TRUE)</div>
+                </li>
+                <li>
+                    Manually download <span class="inline-code">mesh_embeddings.txt.gz</span>:
+                    <br>
+                    <a href="https://github.com/ML2Health/ML2ClinicalTrials/raw/refs/heads/main/Trialbench/data/mesh-embeddings/mesh_embeddings.txt.gz"
+                        target="_blank">Download mesh_embeddings.txt.gz</a>
+                    <div class="step-tip">
+                        Copy it to the <span class="inline-code">trialbench</span> data directory:
+                    </div>
+                    <div class="copy-block">cp mesh_embeddings.txt.gz your_path_to/miniconda3/envs/r_trialbench/lib/python3.10/site-packages/trialbench/data/mesh-embeddings/</div>
+                </li>
+                <li>
+                    Source the R functions and load data:
+                    <div class="copy-block"># Load R functions (replace with your actual path)
+source("your_path_to/r.trialbench/R/function.R", encoding = "UTF-8")
+
+# Download all datasets (optional)
+download_all_data("data/")
+
+# Load data
+task <- "dose" 
+phase <- "All" 
+data_list <- load_data(task, phase) 
+train_df <- data_list$train_df       
+valid_df <- data_list$valid_df 
+test_df <- data_list$test_df </div>
+                </li>
+            </ol>
+        </div>
+    </div>
     <!-- Results Section -->
 
     <div class="container">
