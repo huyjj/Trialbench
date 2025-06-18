@@ -212,52 +212,28 @@
 
             <!-- 标题 -->
             <h1 class="display-4 mb-4">
-                TrialBench: Benchmarking Multi-Modal Artificial-Intelligence-Ready Clinical Trial Prediction
+                TrialBench: Multi-Modal AI-Ready Datasets for Clinical Trial Prediction
             </h1>
 
             <!-- 作者信息模块 -->
             <div class="author-info mb-4">
                 <p class="mb-0">
-                    Jintai Chen<sup>1,†</sup>,
-                    Yaojun Hu<sup>2,†</sup>,
-                    Yingzhou Lu<sup>3</sup>,
-                    Yue Wang<sup>2</sup>,
-                    Xu Cao<sup>1</sup>,
-                    Miao Lin<sup>4</sup>,
-                    Hongxia Xu<sup>5</sup>,
-                    Jian Wu<sup>6</sup>,
-                    Cao Xiao<sup>7</sup>,
-                    Jimeng Sun<sup>1</sup>,
-                    Lucas Glass<sup>8</sup>,
-                    Kexin Huang<sup>9</sup>,
-                    Marinka Zitnik<sup>10</sup>,
-                    Tianfan Fu<sup>11,*</sup>
+                    Jintai Chen<sup>†</sup>,
+                    Yaojun Hu<sup>†</sup>,
+                    Mingchen Cai,
+                    Yingzhou Lu,
+                    Yue Wang,
+                    Xu Cao,
+                    Miao Lin,
+                    Hongxia Xu,
+                    Jian Wu,
+                    Cao Xiao,
+                    Jimeng Sun,
+                    Lucas Glass,
+                    Kexin Huang,
+                    Marinka Zitnik,
+                    Tianfan Fu<sup>*</sup>
                 </p>
-                <p class="text-muted mb-0"><small>1. Computer Science Department, University of Illinois at
-                        Urbana-Champaign, Urbana, USA</small></p>
-                <p class="text-muted mb-0"><small>2. College of Computer Science and Technology, Zhejiang University,
-                        Hangzhou, China</small></p>
-                <p class="text-muted mb-0"><small>3. School of Medicine, Stanford University, Stanford, CA, USA</small>
-                </p>
-                <p class="text-muted mb-0"><small>4. Medical Big Data Center, Guangdong Provincial People's Hospital
-                        (Guangdong Academy of Medical Sciences), Southern Medical University, Guangzhou, China</small>
-                </p>
-                <p class="text-muted mb-0"><small>5. Innovation Institute for Artificial Intelligence in Medicine of
-                        Zhejiang University, College of Pharmaceutical Sciences, Zhejiang University, Hangzhou,
-                        China</small></p>
-                <p class="text-muted mb-0"><small>6. The Second Affiliated Hospital, Zhejiang University School of
-                        Medicine, Hangzhou, China</small></p>
-                <p class="text-muted mb-0"><small>7. GE HealthCare, Chicago, USA</small></p>
-                <p class="text-muted mb-0"><small>8. IQVIA, Boston, USA</small></p>
-                <p class="text-muted mb-0"><small>9. Computer Science Department, Stanford University, Stanford, CA,
-                        USA</small></p>
-                <p class="text-muted mb-0"><small>10. Informatics, Harvard Medical School, Harvard University,
-                        USA</small></p>
-                <p class="text-muted mb-0"><small>11. Department of Computer Science, Rensselaer Polytechnic Institute,
-                        NY, USA</small></p>
-                <p class="text-muted mb-0"><small>* Corresponding author(s): Tianfan Fu (<a
-                            href="mailto:futianfan@gmail.com">futianfan@gmail.com</a>)</small></p>
-                <p class="text-muted"><small>† These authors contributed equally to this work.</small></p>
             </div>
         </div>
     </section>
@@ -268,19 +244,7 @@
         <div class="container">
             <h2 class="text-center mb-4">Abstract</h2>
             <p class="lead text-left">
-                Clinical trials are pivotal for developing new medical treatments but typically carry risks such as
-                patient mortality and enrollment failure that waste immense efforts spanning over a decade. Applying
-                artificial intelligence (AI) to predict key events in clinical trials holds great potential for
-                providing insights to guide trial designs. However, complex data collection and question definition
-                requiring medical expertise have hindered the involvement of AI thus far. This paper tackles these
-                challenges by presenting a comprehensive suite of 23 meticulously curated AI-ready datasets covering
-                multi-modal input features and 8 crucial prediction challenges in clinical trial design, encompassing
-                prediction of trial duration, patient dropout rate, serious adverse event, mortality rate, trial
-                approval outcome, trial failure reason, drug dose finding, design of eligibility criteria. Furthermore,
-                we provide basic validation methods for each task to ensure the datasets' usability and reliability. We
-                anticipate that the availability of such open-access datasets will catalyze the development of advanced
-                AI approaches for clinical trial design, ultimately advancing clinical trial research and accelerating
-                medical solution development.
+Clinical trials are pivotal for developing new medical treatments but typically carry risks such as patient mortality and enrollment failure that waste immense efforts spanning over a decade. Applying artificial intelligence (AI) to predict key events in clinical trials holds great potential for providing insights to guide trial designs. However, complex data collection and question definition requiring medical expertise have hindered the involvement of AI thus far. This paper tackles these challenges by presenting a comprehensive suite of 23 meticulously curated AI-ready datasets covering multi-modal input features and 8 crucial prediction challenges in clinical trial design, encompassing prediction of trial duration, patient dropout rate/event, serious adverse event, mortality event, trial approval outcome, trial failure reason, drug dose, and design of eligibility criteria. Furthermore, we provide basic validation methods for each task to ensure the datasets' usability and reliability. We anticipate that the availability of such open-access datasets will catalyze the development of advanced AI approaches for clinical trial design, ultimately advancing clinical trial research and accelerating medical solution development.
             </p>
         </div>
     </section>
@@ -1074,7 +1038,7 @@ test_df <- data_list$test_df </div>
         <!-- Analysis Chart -->
         <div class="chart-container">
             <!-- <h3 class="mb-4">Result Analysis</h3> -->
-            <img src="docs/combine3fig.png" alt="Result Analysis" class="img-fluid">
+            <img src="docs/figure2.png" alt="Result Analysis" class="img-fluid">
             <p class="mb-4">
                 (a) A histogram showing the distribution of start dates for the selected trials reveals a steady
                 increase in the number of initiated trials over time, reflecting the growing demand for new treatments.
